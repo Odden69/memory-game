@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    max-width: 600px;
+    height: calc(100vh - 37px);
+    margin: 0 auto;
+}
+
+header, section {
+    background-color: aqua;
+    width: 100%;
+    text-align: center;
+}
+
+section {
+    height: 100%;
+}
