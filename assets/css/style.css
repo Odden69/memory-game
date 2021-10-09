@@ -28,6 +28,10 @@ section {
     position: relative;
 }
 
+section h2 {
+    text-align: center;
+}
+
 button {
     display: block;
     font-family: inherit;
@@ -49,7 +53,7 @@ button {
     width: 75%;
 }
 
-/* home page */ 
+/* start page */ 
 
 .btn-how-to-play {
     top: 15%;
@@ -60,13 +64,13 @@ button {
     width: 65%;
 }
 
-.btn-play-game {
+#start-page .btn-play-game {
     top: 45%;
 }
 
 /* how to play page */
 
-.btn-back-to-start {
+#how-to-play-page .btn-back-to-start {
     top: 5%;
 }
 
@@ -84,6 +88,28 @@ button {
     margin-bottom: 2px;
 }
 
+/* choose board size page */
 
+#choose-board-size-page h2 {
+    padding-top: 15px;
+}
 
+button[data-size='[3, 4]'] {
+    top: 12%;
+}
 
+button[data-size='[4, 5]'] {
+    top: 24%;
+}
+
+button[data-size='[5, 6]'] {
+    top: 36%;
+}
+
+button[data-size='[6, 8]'] {
+    top: 48%;
+}
+ 
+#choose-board-size-page .btn-play-game {
+    top: 75%;
+}
