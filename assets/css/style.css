@@ -39,27 +39,27 @@ button {
     transform: translateX(-50%);
 }
 
-.small-button {
+.small-btn {
     font-size: 1.5em;
     width: 55%;
 }
 
-.large-button {
+.large-btn {
     font-size: 2em;
     width: 75%;
 }
 
 /* home page */ 
 
-#button-how-to-play {
+.btn-how-to-play {
     top: 15%;
 }
 
-#button-choose-board-size {
+.btn-choose-board-size {
     top: 25%;
     width: 65%;
 }
 
-#button-play-game {
+.btn-play-game {
     top: 45%;
 }
