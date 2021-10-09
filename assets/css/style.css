@@ -51,15 +51,15 @@ button {
 
 /* home page */ 
 
-#how-to-play {
+#button-how-to-play {
     top: 15%;
 }
 
-#choose-board-size {
+#button-choose-board-size {
     top: 25%;
     width: 65%;
 }
 
-#play-game {
+#button-play-game {
     top: 45%;
 }
