@@ -63,3 +63,27 @@ button {
 .btn-play-game {
     top: 45%;
 }
+
+/* how to play page */
+
+.btn-back-to-start {
+    top: 5%;
+}
+
+#how-to-play {
+    width: 78%;
+    margin: 0 auto;
+    background-color: white;
+    padding: 2px 20px 15px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 15%;
+}
+#how-to-play h2 {
+    margin-bottom: 2px;
+}
+
+
+
+
