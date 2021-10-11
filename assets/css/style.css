@@ -121,8 +121,9 @@ button[data-size='[6, 8]'] {
 }
 
 #game-board {
-    width: 90vw;
+    width: 90%;
     margin: 0 auto;
+    background-color: khaki;
 }
 
 .card-cont {
