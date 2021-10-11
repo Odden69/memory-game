@@ -19,7 +19,7 @@ function loadStartPage() {
     <button class="btn-play-game large-btn">PLAY GAME</button>
   `;
   // Add id to the section element
-  section.setAttribute('id', 'start-page');
+  section.id = 'start-page';
 
   // Add event listener to buttons on the start page
   let howToPlayButton = section.children[0];
@@ -55,7 +55,7 @@ function loadHowToPlayPage() {
     </div>
   `;
   // Add id to the section element
-  section.setAttribute('id', 'how-to-play-page');
+  section.id = 'how-to-play-page';
 
   // Add event listener to buttons on the how to play page
   let startPageButton = section.children[0];
@@ -82,7 +82,7 @@ function loadChooseBoardSizePage() {
     <button class="btn-play-game large-btn">PLAY GAME</button>
   `;
   // Add id to the section element
-  section.setAttribute('id', 'choose-board-size-page');
+  section.id = 'choose-board-size-page';
 
   // Add background color to the default button 
  if (defValue) {
