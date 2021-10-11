@@ -108,11 +108,26 @@ function loadChooseBoardSizePage() {
     })
   }
 
-  // Insert the section element before the script element  
+ /* // Insert the section element before the script element  
   let scriptElement = document.getElementById('script');
-  document.body.insertBefore(section, scriptElement);
+  document.body.insertBefore(section, scriptElement);*/
 }
 
 function loadPlayGamePage() {
-  console.log('nytt test');
+  // Create the section element for the play game page
+  let section = document.getElementsByTagName('section')[0];
+  section.innerHTML = `
+    <h2>Pick two cards to find two identical</h2>
+    <div id="game-board">
+    </div>
+  `;
+
+  // Set height of game board, height = width
+  let boardDiv = section.getElementsByTagName('div')[0];
+  let gameBoardWidth = boardDiv.offsetWidth;
+  let gameBoardHeight = gameBoardWidth;
+  boardDiv.style.height = gameBoardHeight + 'px';
+
+  // Add id to the section element
+  section.setAttribute('id', 'play-game-page');
 }
