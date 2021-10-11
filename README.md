@@ -4,15 +4,14 @@
 
 This is a small interactive web based memory game. 
 
-<h2 align="center"><img src="https://i.ibb.co/TYvTXz1/Example-CI.png"></h2>
-
 ## User Experience (UX)
 
 -   ### User stories
 
     -   #### First Time Visitor Goals
 
-        It should be easy for a first time visitor to see the purpose of the game and to intiutively figure out how it is played or find out how.
+        - It should be easy for a first time visitor to see the purpose of the game and to intiutively figure out how it is played or find out how.
+        - A first time visitor should leave the game with a nice feeling and a desire to come back.
 
     -   #### Returning Visitor Goals
 
@@ -86,11 +85,6 @@ The W3C Markup Validator and W3C CSS Validator Services were used to validate ev
 ### GitHub Pages
 
 The project was deployed to GitHub Pages using the following steps...
-
-
-#
-
-### Making a Local Clone
 
 
 ## Credits
