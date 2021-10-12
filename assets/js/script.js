@@ -122,10 +122,8 @@ function loadPlayGamePage() {
     </div>
   `;
 
-  // Set height of game board
-  // Number of rows and columns, selected by player
-  // let columns = boardSize[0];
-  // let rows = boardSize[1];
+  // Set height and width of the game board
+  // The number of cards is selected by player
 
   let gameBoardWidth = 1; // Resulting board width in px
   let gameBoardHeight = 1; // Resulting board height in px
@@ -159,6 +157,8 @@ function loadPlayGamePage() {
   let turnedHeight = 1;
   let turnedWidth = 1;
 
+  // If the board is unturned, is it the height or the width that limits
+  // the size of the board?
   if (compareHeight < compareWidth) {
     normalSize = compareHeight * boardSize[1] * compareHeight * boardSize[0];
     normalHeight = compareHeight * boardSize[1];
@@ -169,6 +169,8 @@ function loadPlayGamePage() {
     normalWidth = compareWidth * boardSize[0];
   }
 
+  // If the board is turned, is it the height or the width that limits
+  // the size of the board?
   if (compareHeightTurned < compareWidthTurned) {
     turnedSize = compareHeightTurned * boardSize[0] *compareHeightTurned * boardSize[1];
     turnedHeight = compareHeightTurned * boardSize[0];
@@ -179,6 +181,7 @@ function loadPlayGamePage() {
     turnedWidth = compareWidthTurned * boardSize[1];
   }
 
+  // Turned or unturned - which gives the largest board?
   if (normalSize > turnedSize) {
     columns = boardSize[0];
     rows = boardSize[1];
