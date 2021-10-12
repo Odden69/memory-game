@@ -122,10 +122,79 @@ function loadPlayGamePage() {
     </div>
   `;
 
-  // Set height of game board, height = width
+  // Set height of game board
+  // Number of rows and columns, selected by player
+  // let columns = boardSize[0];
+  // let rows = boardSize[1];
+
+  let gameBoardWidth = 1; // Resulting board width in px
+  let gameBoardHeight = 1; // Resulting board height in px
+  let columns = 1; // Resulting number of columns
+  let rows = 1; // Resulting number of rows
+
+  // Use the actual screen size to get the size of the board
+  let screenWidth = screen.width;
+  let screenHeight = screen.height;
+  
+  // Max screen width 600px
+  if (screenWidth > 600) {
+    screenWidth = 600;
+  }
+  // The height of the screen needs to be reduces by the height of the headers
+  // to get the available board height
+  let headerOneHeight = document.getElementsByTagName('h1')[0].offsetHeight;
+  let headerTwoHeight = document.getElementsByTagName('h2')[0].offsetHeight;
+  
+  // To decide the size of the board and if the board should be turned sideways,
+  // compare the size of the individual cards
+  let compareWidth = screenWidth * 0.9 / boardSize[0];
+  let compareHeight = (screenHeight - headerOneHeight - headerTwoHeight) * 0.9 / boardSize[1]; 
+  let compareWidthTurned = screenWidth * 0.9 / boardSize[1];
+  let compareHeightTurned = (screenHeight - headerOneHeight - headerTwoHeight) * 0.9 / boardSize[0];
+
+  let normalSize = 1;
+  let normalHeight = 1;
+  let normalWidth = 1;
+  let turnedSize = 1;
+  let turnedHeight = 1;
+  let turnedWidth = 1;
+
+  if (compareHeight < compareWidth) {
+    normalSize = compareHeight * boardSize[1] * compareHeight * boardSize[0];
+    normalHeight = compareHeight * boardSize[1];
+    normalWidth = compareHeight * boardSize[0];
+  } else {
+    normalSize = compareWidth * boardSize[1] * compareWidth * boardSize[0];
+    normalHeight = compareWidth * boardSize[1];
+    normalWidth = compareWidth * boardSize[0];
+  }
+
+  if (compareHeightTurned < compareWidthTurned) {
+    turnedSize = compareHeightTurned * boardSize[0] *compareHeightTurned * boardSize[1];
+    turnedHeight = compareHeightTurned * boardSize[0];
+    turnedWidth = compareHeightTurned * boardSize[1];
+  } else {
+    turnedSize = compareWidthTurned * boardSize[0] * compareWidthTurned * boardSize[1];
+    turnedHeight = compareWidthTurned * boardSize[0];
+    turnedWidth = compareWidthTurned * boardSize[1];
+  }
+
+  if (normalSize > turnedSize) {
+    columns = boardSize[0];
+    rows = boardSize[1];
+    gameBoardWidth = normalWidth;
+    gameBoardHeight = normalHeight;
+  } else {
+    columns = boardSize[1];
+    rows =  boardSize[0];
+    gameBoardWidth = turnedWidth;
+    gameBoardHeight = turnedHeight;
+  }
+
+  // Set the width and height of the game board div
   let boardDiv = section.getElementsByTagName('div')[0];
-  let gameBoardWidth = boardDiv.offsetWidth;
-  let gameBoardHeight = gameBoardWidth;
+  
+  boardDiv.style.width = gameBoardWidth + 'px';
   boardDiv.style.height = gameBoardHeight + 'px';
 
   // Add id to the section element
