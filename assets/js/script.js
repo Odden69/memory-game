@@ -1,5 +1,5 @@
 // Declare board size variable
-let boardSize = [3, 4];
+let boardSize = [4, 5];
 let defValue = true;
 let markedButtonColor = 'red';
 let unmarkedButtonColor = 'white';
@@ -44,10 +44,6 @@ function loadStartPage() {
   howToPlayButton.addEventListener('click', loadHowToPlayPage);
   chooseBoardSizeButton.addEventListener('click', loadChooseBoardSizePage);
   playGameButton.addEventListener('click', loadPlayGamePage);
-
-  // Insert the section element before the script element  
-  let scriptElement = document.getElementById('script');
-  document.body.insertBefore(section, scriptElement);
 }
 
 function loadHowToPlayPage() {
@@ -79,10 +75,6 @@ function loadHowToPlayPage() {
 
   startPageButton.addEventListener('click', loadStartPage);
   chooseBoardSizeLink.addEventListener('click', loadChooseBoardSizePage);
-
-  // Insert the section element before the script element  
-  let scriptElement = document.getElementById('script');
-  document.body.insertBefore(section, scriptElement);
 }
 
 function loadChooseBoardSizePage() {
@@ -122,10 +114,6 @@ function loadChooseBoardSizePage() {
       }
     })
   }
-
- /* // Insert the section element before the script element  
-  let scriptElement = document.getElementById('script');
-  document.body.insertBefore(section, scriptElement);*/
 }
 
 function loadPlayGamePage() {
@@ -136,7 +124,9 @@ function loadPlayGamePage() {
     <div id="game-board">
     </div>
   `;
-console.log(section);
+  // Add id to the section element
+  section.id = 'play-game-page';
+
   // Set height and width of the game board
   // The number of cards is selected by player
 
@@ -216,6 +206,7 @@ console.log(section);
   boardDiv.style.height = gameBoardHeight + 'px';
 
   // Create an array from 1 to number of available images
+  // to get all the images to choose from
   let numberOfCards = columns * rows;
   let availableImages = [];
 
@@ -223,7 +214,8 @@ console.log(section);
     availableImages.push(i);
   }
 
-  // Create an array of all the cards from a random set of images
+  // Create an array with a random set of available image numbers and with  
+  // a size depending on the users choice of game board size
   let images = [];
 
   for (i = 0; i < numberOfCards / 2; i++) {
@@ -235,39 +227,42 @@ console.log(section);
 
   images = images.concat(images);  //Double it to get a pair of each image
 
-  // Randomize images using Durstenfeld shuffle algorithm 
-  // Found on https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+  // Randomize the array of image numbers using Durstenfeld shuffle algorithm 
+  // to get a chuffled deck of cards
+  // Found on https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array 
   for (let i = (numberOfCards - 1); i > 0; i--) {
     let j = Math.floor(Math.random() * (i+1));
     let temp = images[i];
     images[i] = images[j];
     images[j] = temp; 
   }
-  console.log('total' + images);
 
+  // Add HTML code for each card
   let cardsHtml = '';
 
   for (let i = 0; i < numberOfCards; i++) {
     let image = images[i];
-    let cardWidth = gameBoardWidth / numberOfCards - 1;
+    let cardWidth = gameBoardWidth / columns * 0.96;
     let cardId = 'card' + i;
     let cardHtml = `
-      <div id="${cardId}" class="card-cont" style="width: ${cardWidth}px; height: ${cardWidth}px;>
+      <div id="${cardId}" class="card-cont" style="width: ${cardWidth}px; height: ${cardWidth}px;">
         <div class="inner-card-cont">
           <div class="front-card"></div>
           <div class="back-card"><img src="assets/images/img-${image}.png" alt="buildng blocks"></div>
         </div>
       </div>`;
     cardsHtml += cardHtml;
-    console.log('card ' + cardHtml);
-    console.log('cards '+ cardsHtml);
   }
   
+  // Add the card elements to the game-board div
   section.children[1].innerHTML = cardsHtml;
-  console.log(section.innerHTML);
  
   // Add the last part of the section
 
-  // Add id to the section element
-  section.setAttribute('id', 'play-game-page');
+  // Now the game is ready for the user to select the first card 
+  selectFirstCard();
+}
+
+function selectFirstCard() {
+
 }
