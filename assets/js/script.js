@@ -1,8 +1,23 @@
 // Declare board size variable
-let boardSize = [4, 5];
+let boardSize = [3, 4];
 let defValue = true;
 let markedButtonColor = 'red';
 let unmarkedButtonColor = 'white';
+
+// Declare available cards array
+let allImages = [
+  'building blocks',
+  'abacus',
+  'dinosaur',
+  'blue car',
+  'rubber duck',
+  'bike',
+  'toy airplane',
+  'teddy bear',
+  'cube',
+  'yellow car',
+  'toy boat',
+]
 
 // Wait for the DOM to finish loading before adding
 // the section element for the first page to the html
@@ -114,14 +129,14 @@ function loadChooseBoardSizePage() {
 }
 
 function loadPlayGamePage() {
-  // Create the section element for the play game page
+  // Create the section element for the play game page and define the first part
   let section = document.getElementsByTagName('section')[0];
   section.innerHTML = `
     <h2>Pick two cards to find two identical</h2>
     <div id="game-board">
     </div>
   `;
-
+console.log(section);
   // Set height and width of the game board
   // The number of cards is selected by player
 
@@ -194,11 +209,64 @@ function loadPlayGamePage() {
     gameBoardHeight = turnedHeight;
   }
 
-  // Set the width and height of the game board div
+  // Set the width and height of the game board div element
   let boardDiv = section.getElementsByTagName('div')[0];
   
   boardDiv.style.width = gameBoardWidth + 'px';
   boardDiv.style.height = gameBoardHeight + 'px';
+
+  // Create an array from 1 to number of available images
+  let numberOfCards = columns * rows;
+  let availableImages = [];
+
+  for (i = 1; i <= allImages.length; i++) {
+    availableImages.push(i);
+  }
+
+  // Create an array of all the cards from a random set of images
+  let images = [];
+
+  for (i = 0; i < numberOfCards / 2; i++) {
+    let randomIndex = Math.floor(Math.random() * availableImages.length);
+    let randomImage = availableImages[randomIndex];
+    availableImages.splice(randomIndex, 1);
+    images.push(randomImage);
+  }
+
+  images = images.concat(images);  //Double it to get a pair of each image
+
+  // Randomize images using Durstenfeld shuffle algorithm 
+  // Found on https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+  for (let i = (numberOfCards - 1); i > 0; i--) {
+    let j = Math.floor(Math.random() * (i+1));
+    let temp = images[i];
+    images[i] = images[j];
+    images[j] = temp; 
+  }
+  console.log('total' + images);
+
+  let cardsHtml = '';
+
+  for (let i = 0; i < numberOfCards; i++) {
+    let image = images[i];
+    let cardWidth = gameBoardWidth / numberOfCards - 1;
+    let cardId = 'card' + i;
+    let cardHtml = `
+      <div id="${cardId}" class="card-cont" style="width: ${cardWidth}px; height: ${cardWidth}px;>
+        <div class="inner-card-cont">
+          <div class="front-card"></div>
+          <div class="back-card"><img src="assets/images/img-${image}.png" alt="buildng blocks"></div>
+        </div>
+      </div>`;
+    cardsHtml += cardHtml;
+    console.log('card ' + cardHtml);
+    console.log('cards '+ cardsHtml);
+  }
+  
+  section.children[1].innerHTML = cardsHtml;
+  console.log(section.innerHTML);
+ 
+  // Add the last part of the section
 
   // Add id to the section element
   section.setAttribute('id', 'play-game-page');
