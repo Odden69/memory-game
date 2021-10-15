@@ -265,6 +265,37 @@ function loadPlayGamePage() {
   selectFirstCard();
 }
 
+// Add eventlisteners to the cards. Skip the ones that has already been taken
+let idFirstCard = '';
+let idSecondCard = '';
+let cardsTaken = [];
+let score = 0;
+let imageFirstCard='';
+
 function selectFirstCard() {
+  for(let i = 0; i < numberOfCards; i++) {
+    let card = document.getElementById('card' + i);
+    let src = card.getElementsByTagName('img')[0].src;
+    if (cardsTaken.includes(src)) {
+      continue;
+    } else {
+      card.addEventListener('click', FirstSelected);
+    }
+  }
+}
+
+// Find the id and the img of the first picked card and remove the 
+// eventlistener from the picked card
+function FirstSelected() {
+  let src = this.getElementsByTagName('img')[0].src;
+  idFirstCard = this.id;
+  cardsTaken.push(src);
+  this.style.border = "solid red 2px";
+  imageFirstCard = src;
+  this.removeEventListener('click', FirstSelected);
+  selectSecondCard();
+}
+
+function selectSecondCard(){
 
 }
