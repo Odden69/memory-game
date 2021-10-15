@@ -1,5 +1,5 @@
 // Declare game variables
-let boardSize = [2, 2];  // Default size of board. Later chosen by player
+let boardSize = [4, 5];  // Default size of board. Later chosen by player
 let numberOfCards = 0;   // Number of cards on the board
 let defValue = true;     // True until player changes the size of the board
 let markedButtonColor = 'red';   // Color of a selected button
@@ -269,14 +269,14 @@ function loadPlayGamePage() {
 // Add eventlisteners to the cards. Skip the ones that has already been taken
 let idFirstCard = '';
 let idSecondCard = '';
-let cardsTaken = [];
+let cardsMatched = [];
 let score = 0;
 let imageFirstCard='';
 
 function selectFirstCard() {
   for(let i = 0; i < numberOfCards; i++) {
     let card = document.getElementById('card' + i);
-    if (cardsTaken.includes(card.id)) {
+    if (cardsMatched.includes(card.id)) {
       continue;
     } else {
       card.addEventListener('click', firstSelected);
@@ -295,6 +295,9 @@ function firstSelected() {
   selectSecondCard();
 }
 
+// Delete the firstSelected eventlisteners from all cards and add a new
+// eventlistener to all cards except the ones that has already been matched
+// and the just previous choosen card
 function selectSecondCard(){
   for(let i = 0; i < numberOfCards; i++) {
     let card = document.getElementById('card' + i);
@@ -302,7 +305,7 @@ function selectSecondCard(){
   }
   for(let j = 0; j < numberOfCards; j++) {
     let card = document.getElementById('card' + j);
-    if (cardsTaken.includes(card.id) || card.id === idFirstCard) {
+    if (cardsMatched.includes(card.id) || card.id === idFirstCard) {
       continue;
     } else {
       card.addEventListener('click', secondSelected);
@@ -310,41 +313,38 @@ function selectSecondCard(){
   }  
 }
 
+// Find the id and the img of the second picked card
 function secondSelected() {
   let src = this.getElementsByTagName('img')[0].src;
   imageSecondCard = src;
   idSecondCard = this.id;
   this.style.border = "solid green 2px";
-  this.removeEventListener('click', secondSelected);
   compareCards();
 }
 
 // Compare the image of the two choosen cards
-// If they are identical hide them
+// If they are identical hide them, if not turn them back
+
 // Start by removing the eventlistener from all cards
 function compareCards() {
   for (let i = 0; i < numberOfCards; i++) {
     let card = document.getElementById('card' + i);
     card.removeEventListener('click', secondSelected);
   }
+  numberOfMoves++;
   if (imageFirstCard === imageSecondCard) {
     function hideCards() {
       document.getElementById(idFirstCard).style.visibility = "hidden";
       document.getElementById(idSecondCard).style.visibility = "hidden";
-      numberOfMoves++;
-      cardsTaken.push(idFirstCard);
-      cardsTaken.push(idSecondCard);
       selectFirstCard();
     }
     //The setTimeout method was found on https://www.w3schools.com/jsref/met_win_settimeout.asp
-    setTimeout(hideCards, 3000);  
-    numberOfMoves++;
-    cardsTaken.push(idFirstCard, idSecondCard);
+    setTimeout(hideCards, 3000);
+    cardsMatched.push(idFirstCard, idSecondCard);
   } else {
     function turnCards() {
       document.getElementById(idFirstCard).style.border = "none";
       document.getElementById(idSecondCard).style.border = "none";
-      numberOfMoves++;
       selectFirstCard();
     }
     setTimeout(turnCards, 3000);
