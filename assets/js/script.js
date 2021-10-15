@@ -302,8 +302,7 @@ function selectSecondCard(){
   }
   for(let j = 0; j < numberOfCards; j++) {
     let card = document.getElementById('card' + j);
-    let src = card.getElementsByTagName('img')[0].src;
-    if (cardsTaken.includes(card.id)) {
+    if (cardsTaken.includes(card.id) || card.id === idFirstCard) {
       continue;
     } else {
       card.addEventListener('click', secondSelected);
@@ -315,7 +314,7 @@ function secondSelected() {
   let src = this.getElementsByTagName('img')[0].src;
   imageSecondCard = src;
   idSecondCard = this.id;
-  this.style.border = "solid red 2px";
+  this.style.border = "solid green 2px";
   this.removeEventListener('click', secondSelected);
   compareCards();
 }
@@ -332,14 +331,15 @@ function compareCards() {
     function hideCards() {
       document.getElementById(idFirstCard).style.visibility = "hidden";
       document.getElementById(idSecondCard).style.visibility = "hidden";
+      numberOfMoves++;
+      cardsTaken.push(idFirstCard);
+      cardsTaken.push(idSecondCard);
+      selectFirstCard();
     }
     //The setTimeout method was found on https://www.w3schools.com/jsref/met_win_settimeout.asp
-    setTimeout(hideCards, 5000);  
+    setTimeout(hideCards, 3000);  
     numberOfMoves++;
-    console.log(numberOfMoves);
-    cardsTaken.push(idFirstCard);
-    cardsTaken.push(idSecondCard);
-    console.log('cards taken' + cardsTaken);
+    cardsTaken.push(idFirstCard, idSecondCard);
   } else {
     console.log('test,test');
   }
