@@ -1,10 +1,11 @@
-// Declare board size variable
-let boardSize = [4, 5];
-let defValue = true;
-let markedButtonColor = 'red';
-let unmarkedButtonColor = 'white';
+// Declare game variables
+let boardSize = [4, 5];  // Default size of board. Later chosen by player
+let numberOfCards = 0;   // Number of cards on the board
+let defValue = true;     // True until player changes the size of the board
+let markedButtonColor = 'red';   // Color of a selected button
+let unmarkedButtonColor = 'white'; // Color of a non selected button
 
-// Declare available cards array
+// Declare available images array
 let allImages = [
   'building blocks',
   'abacus',
@@ -187,6 +188,7 @@ function loadPlayGamePage() {
   }
 
   // Turned or unturned - which gives the largest board?
+  // Decide board height and width from that
   if (normalSize > turnedSize) {
     columns = boardSize[0];
     rows = boardSize[1];
@@ -207,7 +209,7 @@ function loadPlayGamePage() {
 
   // Create an array from 1 to number of available images
   // to get all the images to choose from
-  let numberOfCards = columns * rows;
+  numberOfCards = columns * rows;
   let availableImages = [];
 
   for (i = 1; i <= allImages.length; i++) {
@@ -219,13 +221,13 @@ function loadPlayGamePage() {
   let images = [];
 
   for (i = 0; i < numberOfCards / 2; i++) {
-    let randomIndex = Math.floor(Math.random() * availableImages.length);
-    let randomImage = availableImages[randomIndex];
-    availableImages.splice(randomIndex, 1);
-    images.push(randomImage);
+    let randomIndex = Math.floor(Math.random() * availableImages.length); //Pick a random index number
+    let randomImage = availableImages[randomIndex];         // What available image has that index number?
+    availableImages.splice(randomIndex, 1);                 // Remove that image from the available array
+    images.push(randomImage);                               // Push that image to the image array          
   }
 
-  images = images.concat(images);  //Double it to get a pair of each image
+  images = images.concat(images);  //Double the image array to get a pair of each image
 
   // Randomize the array of image numbers using Durstenfeld shuffle algorithm 
   // to get a chuffled deck of cards
