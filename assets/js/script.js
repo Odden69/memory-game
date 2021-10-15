@@ -297,5 +297,31 @@ function FirstSelected() {
 }
 
 function selectSecondCard(){
+  for(let i = 0; i < numberOfCards; i++) {
+    let card = document.getElementById('card' + i);
+    card.removeEventListener('click', FirstSelected);
+  }
+  for(let j = 0; j < numberOfCards; j++) {
+    let card = document.getElementById('card' + j);
+    let src = card.getElementsByTagName('img')[0].src;
+    if (cardsTaken.includes(src)) {
+      continue;
+    } else {
+      card.addEventListener('click', secondSelected);
+    }
+  }  
+}
 
+function secondSelected() {
+  let src = this.getElementsByTagName('img')[0].src;
+  idSecondCard = this.id;
+  cardsTaken.push(src);
+  this.style.border = "solid red 2px";
+  imageSecondCard = src;
+  this.removeEventListener('click', secondSelected);
+  compareCards();
+}
+
+function compareCards() {
+  console.log('testigen');
 }
