@@ -341,6 +341,12 @@ function compareCards() {
     numberOfMoves++;
     cardsTaken.push(idFirstCard, idSecondCard);
   } else {
-    console.log('test,test');
+    function turnCards() {
+      document.getElementById(idFirstCard).style.border = "none";
+      document.getElementById(idSecondCard).style.border = "none";
+      numberOfMoves++;
+      selectFirstCard();
+    }
+    setTimeout(turnCards, 3000);
   }
 }
