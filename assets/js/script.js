@@ -298,14 +298,14 @@ function firstSelected() {
   let src = this.getElementsByTagName('img')[0].src;
   imageFirstCard = src;
   idFirstCard = this.id;
-  this.style.border = "solid red 2px";
+  this.getElementsByClassName('inner-card-cont')[0].style.transform = 'rotateY(180deg)';
   this.removeEventListener('click', firstSelected);
   selectSecondCard();
 }
 
 // Delete the firstSelected eventlisteners from all cards and add a new
 // eventlistener to all cards except the ones that has already been matched
-// and the just previous choosen card
+// and the just previously choosen card
 function selectSecondCard(){
   for(let i = 0; i < numberOfCards; i++) {
     let card = document.getElementById('card' + i);
@@ -326,7 +326,7 @@ function secondSelected() {
   let src = this.getElementsByTagName('img')[0].src;
   imageSecondCard = src;
   idSecondCard = this.id;
-  this.style.border = "solid green 2px";
+  this.getElementsByClassName('inner-card-cont')[0].style.transform = 'rotateY(180deg)';
   compareCards();
 }
 
@@ -348,14 +348,16 @@ function compareCards() {
       selectFirstCard();
     }
     //The setTimeout method was found on https://www.w3schools.com/jsref/met_win_settimeout.asp
-    setTimeout(hideCards, 3000);
+    setTimeout(hideCards, 1000);
     cardsMatched.push(idFirstCard, idSecondCard);
   } else {
     function turnCards() {
-      document.getElementById(idFirstCard).style.border = "none";
-      document.getElementById(idSecondCard).style.border = "none";
+      let firstCard = document.getElementById(idFirstCard);
+      let secondCard = document.getElementById(idSecondCard);
+      firstCard.getElementsByClassName('inner-card-cont')[0].style.transform = 'none';
+      secondCard.getElementsByClassName('inner-card-cont')[0].style.transform = 'none';
       selectFirstCard();
     }
-    setTimeout(turnCards, 3000);
+    setTimeout(turnCards, 2500);
   }
 }
