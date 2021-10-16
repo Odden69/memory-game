@@ -122,12 +122,19 @@ function loadPlayGamePage() {
   // Create the section element for the play game page and define the first part
   let section = document.getElementsByTagName('section')[0];
   section.innerHTML = `
-    <h2>Pick two cards to find two identical</h2>
+    <h3>Pick two cards to find two identical</h3>
     <div id="game-board">
     </div>
+    <h3 id="number-of-moves">Number of moves: ${numberOfMoves}</h3>
+    <button class="btn-quit-game large-btn">QUIT GAME</button>
   `;
   // Add id to the section element
   section.id = 'play-game-page';
+
+  // Add eventlistener to quit game button 
+  let quitGameButton = section.getElementsByTagName('button')[0];
+
+  quitGameButton.addEventListener('click', loadStartPage);
 
   // Set height and width of the game board
   // The number of cards is selected by player
@@ -146,16 +153,19 @@ function loadPlayGamePage() {
     screenWidth = 600;
   }
   // The height of the screen needs to be reduces by the height of the headers
-  // to get the available board height
+  // and the quit game button to get the available board height
   let headerOneHeight = document.getElementsByTagName('h1')[0].offsetHeight;
-  let headerTwoHeight = document.getElementsByTagName('h2')[0].offsetHeight;
-  
+  let headerTwoHeight = document.getElementsByTagName('h3')[0].offsetHeight;
+  let headerThreeHeight = document.getElementsByTagName('h3')[1].offsetHeight;
+  let buttonHeight = document.getElementsByTagName('button')[0].offsetHeight;
+  let availableScreenHeight = screenHeight - (headerOneHeight + headerTwoHeight + headerThreeHeight + buttonHeight);
+
   // To decide the size of the board and if the board should be turned sideways,
   // compare the size of the individual cards
   let compareWidth = screenWidth * 0.9 / boardSize[0];
-  let compareHeight = (screenHeight - headerOneHeight - headerTwoHeight) * 0.9 / boardSize[1]; 
+  let compareHeight = availableScreenHeight * 0.9 / boardSize[1]; 
   let compareWidthTurned = screenWidth * 0.9 / boardSize[1];
-  let compareHeightTurned = (screenHeight - headerOneHeight - headerTwoHeight) * 0.9 / boardSize[0];
+  let compareHeightTurned = availableScreenHeight * 0.9 / boardSize[0];
 
   let normalSize = 1;
   let normalHeight = 1;
@@ -259,8 +269,6 @@ function loadPlayGamePage() {
   
   // Add the card elements to the game-board div
   section.children[1].innerHTML = cardsHtml;
- 
-  // Add the last part of the section
 
   // Now the game is ready for the user to select the first card 
   selectFirstCard();
@@ -332,6 +340,7 @@ function compareCards() {
     card.removeEventListener('click', secondSelected);
   }
   numberOfMoves++;
+  document.getElementById('number-of-moves').innerHTML = `<h3 id="number-of-moves">Number of moves: ${numberOfMoves}</h3>`
   if (imageFirstCard === imageSecondCard) {
     function hideCards() {
       document.getElementById(idFirstCard).style.visibility = "hidden";
