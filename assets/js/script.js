@@ -278,7 +278,7 @@ function loadPlayGamePage() {
 let idFirstCard = '';
 let idSecondCard = '';
 let cardsMatched = [];
-let score = 0;
+let imageSecondCard='';
 let imageFirstCard='';
 
 function selectFirstCard() {
