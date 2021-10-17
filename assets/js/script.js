@@ -33,6 +33,7 @@ let allImages = [
   'bathing ball',
 ]
 
+
 // Wait for the DOM to finish loading before adding
 // the section element for the first page to the html
 document.addEventListener("DOMContentLoaded", function () {
@@ -263,8 +264,6 @@ function loadPlayGamePage() {
     images[j] = temp; 
   }
 
-  console.log(images);
-
   // Add HTML code for each card
   let cardsHtml = '';
 
@@ -276,7 +275,7 @@ function loadPlayGamePage() {
       <div id="${cardId}" class="card-cont" style="width: ${cardWidth}px; height: ${cardWidth}px;">
         <div class="inner-card-cont">
           <div class="front-card"></div>
-          <div class="back-card"><img src="assets/images/img-${image}.png" alt="buildng blocks"></div>
+          <div class="back-card"><img src="assets/images/img-${image}.png" alt="${allImages[(image-1)]}"></div>
         </div>
       </div>`;
     cardsHtml += cardHtml;
@@ -404,7 +403,7 @@ function gameFinished() {
   let chooseBoardSizeButton = section.getElementsByTagName('button')[2];
   let backToStartButton = section.getElementsByTagName('button')[3];
 
-  chooseBoardSizeButton.addEventListener('click', loadChooseBoardSizePage);
+  chooseBoardSizeButton.addEventListener('click', changeSize);
   playAgainButton.addEventListener('click', playAgain);
   backToStartButton.addEventListener('click', loadStartPage);
 }
@@ -423,4 +422,9 @@ function playAgain() {
   resetGame();
   document.getElementsByTagName('section')[0].innerHTML = '';
   loadPlayGamePage();
+}
+
+function changeSize() {
+  resetGame();
+  loadChooseBoardSizePage();
 }
