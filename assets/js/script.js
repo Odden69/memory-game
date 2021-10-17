@@ -18,6 +18,19 @@ let allImages = [
   'cube',
   'yellow car',
   'toy boat',
+  'helicopter',
+  'circus tent',
+  'black board',
+  'ball',
+  'paint bucket',
+  'pterosaur',
+  'tricycle',
+  'maracas',
+  'lego',
+  'globe',
+  'toy train',
+  'slide',
+  'bathing ball',
 ]
 
 // Wait for the DOM to finish loading before adding
@@ -257,7 +270,7 @@ function loadPlayGamePage() {
 
   for (let i = 0; i < numberOfCards; i++) {
     let image = images[i];
-    let cardWidth = gameBoardWidth / columns * 0.96;
+    let cardWidth = gameBoardWidth / columns * 0.95;
     let cardId = 'card' + i;
     let cardHtml = `
       <div id="${cardId}" class="card-cont" style="width: ${cardWidth}px; height: ${cardWidth}px;">
