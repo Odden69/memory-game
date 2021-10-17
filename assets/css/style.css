@@ -168,3 +168,36 @@ button[data-size='[6, 8]'] {
   height: 100%;
   width: 100%;
 }
+
+/* Game Finished note */
+#dimmed-background {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(139, 139, 139, 0.85);
+    z-index:100;
+}
+
+#game-finished {
+    position: absolute;
+    top: 8%;
+    left: calc(50% - 120px);
+    width: 240px;
+    height: 400px;
+    background: red;
+    z-index: 101;
+}
+
+#btn-gf-play-again {
+    top: 30%;
+}
+
+#btn-gf-choose-board-size {
+    top: 50%;
+}
+
+#btn-gf-back-to-start {
+    top: 75%;
+}

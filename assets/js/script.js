@@ -250,6 +250,8 @@ function loadPlayGamePage() {
     images[j] = temp; 
   }
 
+  console.log(images);
+
   // Add HTML code for each card
   let cardsHtml = '';
 
@@ -282,14 +284,18 @@ let imageSecondCard='';
 let imageFirstCard='';
 
 function selectFirstCard() {
-  for(let i = 0; i < numberOfCards; i++) {
-    let card = document.getElementById('card' + i);
-    if (cardsMatched.includes(card.id)) {
-      continue;
-    } else {
-      card.addEventListener('click', firstSelected);
+  if (cardsMatched.length === numberOfCards) {
+    gameFinished();
+  } else {
+    for (let i = 0; i < numberOfCards; i++) {
+      let card = document.getElementById('card' + i);
+      if (cardsMatched.includes(card.id)) {
+        continue;
+      } else {
+        card.addEventListener('click', firstSelected);
+      }
     }
-  }
+  }  
 }
 
 // Find the id and the img of the first picked card and remove the 
@@ -362,6 +368,34 @@ function compareCards() {
   }
 }
 
+function gameFinished() {
+  // HTML code to post a game finished note
+  let html = `
+    <div id="dimmed-background"></div>
+    <div id="game-finished">
+      <h2>Good job!</h2>
+      <h3>You finished the game in ${numberOfMoves} moves!</h3>
+      <button id="btn-gf-play-again" class="big-button small-btn">Play again</button>
+      <button id="btn-gf-choose-board-size" class="big-button small-btn">Choose board size</button>
+      <button id="btn-gf-back-to-start" class="big-button small-btn">Back to start</button>
+    </div>
+  `
+  // Remove the eventlistener from the original quit game button
+  let section = document.getElementsByTagName('section')[0];
+  section.innerHTML += html;
+  let quitGameButton = section.getElementsByTagName('button')[0];
+  quitGameButton.removeEventListener('click', quitGame);
+  
+  // Add eventlisteners to the buttons on the game finished note
+  let playAgainButton = section.getElementsByTagName('button')[1];
+  let chooseBoardSizeButton = section.getElementsByTagName('button')[2];
+  let backToStartButton = section.getElementsByTagName('button')[3];
+
+  chooseBoardSizeButton.addEventListener('click', loadChooseBoardSizePage);
+  playAgainButton.addEventListener('click', playAgain);
+  backToStartButton.addEventListener('click', loadStartPage);
+}
+
 function resetGame() {
   numberOfMoves = 0;
   cardsMatched = [];
@@ -370,4 +404,10 @@ function resetGame() {
 function quitGame() {
   resetGame();
   loadStartPage();
+}
+
+function playAgain() {
+  resetGame();
+  document.getElementsByTagName('section')[0].innerHTML = '';
+  loadPlayGamePage();
 }
