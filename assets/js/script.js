@@ -1,7 +1,6 @@
 // Declare game variables
-let boardSize = [4, 5];  // Default size of board. Later chosen by player
+let boardSize = '[4, 5]';  // Default size of board. Later chosen by player
 let numberOfCards = 0;   // Number of cards on the board
-let defValue = true;     // True until player changes the size of the board
 let markedButtonColor = 'red';   // Color of a selected button
 let unmarkedButtonColor = 'white'; // Color of a non selected button
 let numberOfMoves = 0;   // Number of pairs picked by the player
@@ -73,7 +72,6 @@ function loadHowToPlayPage() {
   // Add event listener to buttons on the how to play page
   let startPageButton = section.children[0];
   let chooseBoardSizeLink = section.getElementsByTagName('span')[0];
-  console.log(chooseBoardSizeLink)
 
   startPageButton.addEventListener('click', loadStartPage);
   chooseBoardSizeLink.addEventListener('click', loadChooseBoardSizePage);
@@ -93,15 +91,17 @@ function loadChooseBoardSizePage() {
   // Add id to the section element
   section.id = 'choose-board-size-page';
 
-  // Add background color to the default button 
- if (defValue) {
-    section.querySelector('[data-size = "[4, 5]"]').style.backgroundColor = markedButtonColor;
+  let buttons = section.getElementsByTagName('button');
+
+  // Add background color to the button with the active board size 
+  for (let button of buttons) {
+    if (button.getAttribute('data-size') === boardSize){
+      button.style.backgroundColor = markedButtonColor;
+    };
   }
 
   // Add event listener to buttons on the choose board size page
   // and set color of the selected board size button
-  let buttons = section.getElementsByTagName('button');
-
   for (let button of buttons) {
     button.addEventListener('click', function(){
       if (this.className.split(' ')[0] === 'btn-play-game') {
@@ -201,13 +201,13 @@ function loadPlayGamePage() {
   // Turned or unturned - which gives the largest board?
   // Decide board height and width from that
   if (normalSize > turnedSize) {
-    columns = boardSize[0];
-    rows = boardSize[1];
+    columns = boardSize[1];
+    rows = boardSize[4];
     gameBoardWidth = normalWidth;
     gameBoardHeight = normalHeight;
   } else {
-    columns = boardSize[1];
-    rows =  boardSize[0];
+    columns = boardSize[4];
+    rows =  boardSize[1];
     gameBoardWidth = turnedWidth;
     gameBoardHeight = turnedHeight;
   }
