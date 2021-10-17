@@ -134,7 +134,7 @@ function loadPlayGamePage() {
   // Add eventlistener to quit game button 
   let quitGameButton = section.getElementsByTagName('button')[0];
 
-  quitGameButton.addEventListener('click', loadStartPage);
+  quitGameButton.addEventListener('click', quitGame);
 
   // Set height and width of the game board
   // The number of cards is selected by player
@@ -360,4 +360,14 @@ function compareCards() {
     }
     setTimeout(turnCards, 2500);
   }
+}
+
+function resetGame() {
+  numberOfMoves = 0;
+  cardsMatched = [];
+}
+
+function quitGame() {
+  resetGame();
+  loadStartPage();
 }
