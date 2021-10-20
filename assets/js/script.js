@@ -1,8 +1,10 @@
 // Declare game variables
 let boardSize = '[4, 5]';  // Default size of board. Later chosen by player
 let numberOfCards = 0;   // Number of cards on the board
-let markedButtonColor = 'red';   // Color of a selected button
-let unmarkedButtonColor = 'white'; // Color of a non selected button
+const markedButtonColor = '#193C32';   // Color of a selected button
+let unmarkedButtonColor = '#F0F2DC'; // Color of a non selected button
+const lightText = unmarkedButtonColor;
+const darkText = markedButtonColor;
 let numberOfMoves = 0;   // Number of pairs picked by the player
 
 // Declare available images array
@@ -32,7 +34,6 @@ let allImages = [
   'slide',
   'bathing ball',
 ]
-
 
 // Wait for the DOM to finish loading before adding
 // the section element for the first page to the html
@@ -111,6 +112,7 @@ function loadChooseBoardSizePage() {
   for (let button of buttons) {
     if (button.getAttribute('data-size') === boardSize){
       button.style.backgroundColor = markedButtonColor;
+      button.style.color = lightText;
     };
   }
 
@@ -123,8 +125,10 @@ function loadChooseBoardSizePage() {
       } else {
         for (let i = 0; i<buttons.length; i++) {
           buttons[i].style.backgroundColor = unmarkedButtonColor;
+          buttons[i].style.color = darkText;
         }
         this.style.backgroundColor = markedButtonColor;
+        this.style.color = lightText;
         boardSize = this.getAttribute('data-size');
         defValue = false;
       }
@@ -174,12 +178,20 @@ function loadPlayGamePage() {
   let buttonHeight = document.getElementsByTagName('button')[0].offsetHeight;
   let availableScreenHeight = screenHeight - (headerOneHeight + headerTwoHeight + headerThreeHeight + buttonHeight);
 
+  console.log('headerOneHeight' + headerOneHeight);
+  console.log('headerTwoHeight' + headerTwoHeight);
+  console.log('headerThreeHeight' + headerThreeHeight);
+  console.log('ScreenHeight' + screenHeight);
+  console.log('ButtonHeight' + buttonHeight);
+console.log('availableScreenHeight' + availableScreenHeight);
   // To decide the size of the board and if the board should be turned sideways,
   // compare the size of the individual cards
-  let compareWidth = screenWidth * 0.9 / boardSize[0];
-  let compareHeight = availableScreenHeight * 0.9 / boardSize[1]; 
-  let compareWidthTurned = screenWidth * 0.9 / boardSize[1];
-  let compareHeightTurned = availableScreenHeight * 0.9 / boardSize[0];
+  let compareWidth = screenWidth * 0.9 / boardSize[1];
+  let compareHeight = availableScreenHeight * 0.9 / boardSize[4]; 
+  let compareWidthTurned = screenWidth * 0.9 / boardSize[4];
+  let compareHeightTurned = availableScreenHeight * 0.9 / boardSize[1];
+
+  console.log('cw' + compareWidth + 'ch' + compareHeight + 'cwt' + compareWidthTurned + 'cht' + compareHeightTurned);
 
   let normalSize = 1;
   let normalHeight = 1;
@@ -191,27 +203,28 @@ function loadPlayGamePage() {
   // If the board is unturned, is it the height or the width that limits
   // the size of the board?
   if (compareHeight < compareWidth) {
-    normalSize = compareHeight * boardSize[1] * compareHeight * boardSize[0];
-    normalHeight = compareHeight * boardSize[1];
-    normalWidth = compareHeight * boardSize[0];
+    normalSize = compareHeight * boardSize[4] * compareHeight * boardSize[1];
+    normalHeight = compareHeight * boardSize[4];
+    normalWidth = compareHeight * boardSize[1];
   } else {
-    normalSize = compareWidth * boardSize[1] * compareWidth * boardSize[0];
-    normalHeight = compareWidth * boardSize[1];
-    normalWidth = compareWidth * boardSize[0];
+    normalSize = compareWidth * boardSize[4] * compareWidth * boardSize[1];
+    normalHeight = compareWidth * boardSize[4];
+    normalWidth = compareWidth * boardSize[1];
   }
 
   // If the board is turned, is it the height or the width that limits
   // the size of the board?
   if (compareHeightTurned < compareWidthTurned) {
-    turnedSize = compareHeightTurned * boardSize[0] *compareHeightTurned * boardSize[1];
-    turnedHeight = compareHeightTurned * boardSize[0];
-    turnedWidth = compareHeightTurned * boardSize[1];
+    turnedSize = compareHeightTurned * boardSize[1] *compareHeightTurned * boardSize[4];
+    turnedHeight = compareHeightTurned * boardSize[1];
+    turnedWidth = compareHeightTurned * boardSize[4];
   } else {
-    turnedSize = compareWidthTurned * boardSize[0] * compareWidthTurned * boardSize[1];
-    turnedHeight = compareWidthTurned * boardSize[0];
-    turnedWidth = compareWidthTurned * boardSize[1];
+    turnedSize = compareWidthTurned * boardSize[1] * compareWidthTurned * boardSize[4];
+    turnedHeight = compareWidthTurned * boardSize[1];
+    turnedWidth = compareWidthTurned * boardSize[4];
   }
-
+console.log('normalSize' + normalSize);
+console.log('turnedSize' + turnedSize);
   // Turned or unturned - which gives the largest board?
   // Decide board height and width from that
   if (normalSize > turnedSize) {
@@ -264,12 +277,13 @@ function loadPlayGamePage() {
     images[j] = temp; 
   }
 
-  // Add HTML code for each card
+  // Add HTML code for each card 
   let cardsHtml = '';
 
   for (let i = 0; i < numberOfCards; i++) {
     let image = images[i];
-    let cardWidth = gameBoardWidth / columns * 0.95;
+    let cardWidth = gameBoardWidth / columns * 0.94;
+    console.log(cardWidth);
     let cardId = 'card' + i;
     let cardHtml = `
       <div id="${cardId}" class="card-cont" style="width: ${cardWidth}px; height: ${cardWidth}px;">

@@ -11,6 +11,7 @@ body {
     max-width: 600px;
     height: calc(100vh - 64px);
     margin: 0 auto;
+    color: #193C32;
 }
 header h1 {
     font-size: 2.5em;
@@ -19,7 +20,7 @@ header h1 {
 }
 
 header, section {
-    background-color: aqua;
+    background-color: #689694;
     width: 100%;
 }
 
@@ -47,6 +48,9 @@ button {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    background-color: #f0f2dc;
+    color: #193C32;
+    cursor: pointer;
 }
 
 .small-btn {
@@ -83,7 +87,7 @@ button {
 #how-to-play {
     width: 78%;
     margin: 0 auto;
-    background-color: white;
+    background-color: #F0F2DC;
     padding: 2px 20px 15px;
     position: absolute;
     left: 50%;
@@ -129,7 +133,7 @@ button[data-size='[6, 8]'] {
 #game-board {
     width: 90%;
     margin: 0 auto;
-    background-color: khaki;
+    background-color: #689694;
 }
 
 .card-cont {
@@ -186,7 +190,8 @@ button[data-size='[6, 8]'] {
     left: calc(50% - 120px);
     width: 240px;
     height: 400px;
-    background: red;
+    background: #F2D272;
+    color: #193C32;
     z-index: 101;
 }
 
