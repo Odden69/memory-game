@@ -6,6 +6,7 @@ let unmarkedButtonColor = '#F0F2DC'; // Color of a non selected button
 const lightText = unmarkedButtonColor;
 const darkText = markedButtonColor;
 let numberOfMoves = 0;   // Number of pairs picked by the player
+let gameBoardPage = false; // When true, eventlistener 'resize' is enabled 
 
 // Declare available images array
 let allImages = [
@@ -40,6 +41,16 @@ let allImages = [
 document.addEventListener("DOMContentLoaded", function () {
   loadStartPage();
 });
+
+// Let a screen resize trigger a reload of the screen when the player
+// is on the gameboard page
+
+window.addEventListener("resize", reloadGamePage);
+function reloadGamePage() {
+  if (gameBoardPage) {
+    loadPlayGamePage();
+  }
+}
 
 function loadStartPage() {
   // Create the section element for the start page 
@@ -137,6 +148,8 @@ function loadChooseBoardSizePage() {
 }
 
 function loadPlayGamePage() {
+  gameBoardPage = true; // Set to true, to enable reload of playGamePage when screen is resized
+
   // Create the section element for the play game page and define the first part
   let section = document.getElementsByTagName('section')[0];
   section.innerHTML = `
@@ -223,8 +236,8 @@ console.log('availableScreenHeight' + availableScreenHeight);
     turnedHeight = compareWidthTurned * boardSize[1];
     turnedWidth = compareWidthTurned * boardSize[4];
   }
-console.log('normalSize' + normalSize);
-console.log('turnedSize' + turnedSize);
+  console.log('normalSize' + normalSize);
+  console.log('turnedSize' + turnedSize);
   // Turned or unturned - which gives the largest board?
   // Decide board height and width from that
   if (normalSize > turnedSize) {
@@ -238,7 +251,7 @@ console.log('turnedSize' + turnedSize);
     gameBoardWidth = turnedWidth;
     gameBoardHeight = turnedHeight;
   }
-
+console.log(columns);
   // Set the width and height of the game board div element
   let boardDiv = section.getElementsByTagName('div')[0];
   
@@ -429,6 +442,7 @@ function resetGame() {
 
 function quitGame() {
   resetGame();
+  gameBoardPage = false;
   loadStartPage();
 }
 
@@ -440,5 +454,6 @@ function playAgain() {
 
 function changeSize() {
   resetGame();
+  gameBoardPage = false;
   loadChooseBoardSizePage();
 }
