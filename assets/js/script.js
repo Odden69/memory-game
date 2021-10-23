@@ -56,17 +56,21 @@ function loadStartPage() {
   // Create the section element for the start page 
   let section = document.getElementsByTagName('section')[0];
   section.innerHTML = `
-    <button class="btn-how-to-play small-btn">How to play</button>
-    <button class="btn-choose-board-size small-btn">Choose board size</button>
-    <button class="btn-play-game large-btn">PLAY GAME</button>
+    <div id="spacer"></div>
+    <div id="start-page-button-cont">
+      <button class="btn-how-to-play small-btn">How to play</button>
+      <button class="btn-choose-board-size small-btn">Choose board size</button>
+      <button class="btn-play-game large-btn">PLAY GAME</button>
+    </div>
+    <img id="first-page-image" src="assets/images/first-page-image.png" alt="Picture of the game board">
   `;
   // Add id to the section element
   section.id = 'start-page';
 
   // Add event listener to buttons on the start page
-  let howToPlayButton = section.children[0];
-  let chooseBoardSizeButton = section.children[1];
-  let playGameButton = section.children[2];
+  let howToPlayButton = section.children[1].children[0];
+  let chooseBoardSizeButton = section.children[1].children[1];
+  let playGameButton = section.children[1].children[2];
 
   howToPlayButton.addEventListener('click', loadHowToPlayPage);
   chooseBoardSizeButton.addEventListener('click', loadChooseBoardSizePage);
@@ -149,7 +153,7 @@ function loadChooseBoardSizePage() {
 
 function loadPlayGamePage() {
   gameBoardPage = true; // Set to true, to enable reload of playGamePage when screen is resized
-
+  
   // Create the section element for the play game page and define the first part
   let section = document.getElementsByTagName('section')[0];
   section.innerHTML = `
@@ -438,6 +442,7 @@ function gameFinished() {
 function resetGame() {
   numberOfMoves = 0;
   cardsMatched = [];
+  document.getElementsByTagName('section')[0].innerHTML = '';
 }
 
 function quitGame() {
@@ -447,8 +452,7 @@ function quitGame() {
 }
 
 function playAgain() {
-  resetGame();
-  document.getElementsByTagName('section')[0].innerHTML = '';
+  resetGame(); 
   loadPlayGamePage();
 }
 
