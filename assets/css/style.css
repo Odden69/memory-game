@@ -91,7 +91,7 @@ button {
     bottom: 0;
 }
 
-#first-page-image {
+#start-page-image {
     display: none;
     height: 35%;
     margin: 10% auto;
@@ -235,7 +235,7 @@ button[data-size='[6, 8]'] {
         height: 40%;
     }
 
-    #first-page-image {
+    #start-page-image {
         display: block;
     }
 }

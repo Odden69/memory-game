@@ -62,7 +62,7 @@ function loadStartPage() {
       <button class="btn-choose-board-size small-btn">Choose board size</button>
       <button class="btn-play-game large-btn">PLAY GAME</button>
     </div>
-    <img id="first-page-image" src="assets/images/first-page-image.png" alt="Picture of the game board">
+    <img id="start-page-image" src="assets/images/start-page-image.png" alt="Picture of the game board">
   `;
   // Add id to the section element
   section.id = 'start-page';
@@ -153,7 +153,7 @@ function loadChooseBoardSizePage() {
 
 function loadPlayGamePage() {
   gameBoardPage = true; // Set to true, to enable reload of playGamePage when screen is resized
-  
+
   // Create the section element for the play game page and define the first part
   let section = document.getElementsByTagName('section')[0];
   section.innerHTML = `
