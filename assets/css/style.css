@@ -101,7 +101,7 @@ button {
 /* how to play page */
 
 #how-to-play-page .btn-back-to-start {
-    top: 5%;
+    top: 15px;
 }
 
 #how-to-play {
@@ -112,10 +112,15 @@ button {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: 15%;
+    top: 75px;
 }
 #how-to-play h2 {
     margin-bottom: 2px;
+}
+
+#how-to-play span {
+    color: blue;
+    text-decoration: underline;
 }
 
 /* choose board size page */
@@ -239,6 +244,7 @@ button[data-size='[6, 8]'] {
         display: block;
     }
 }
+
 
 /* For screen height min 800px */
 @media screen and (min-height: 800px) {

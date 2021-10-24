@@ -35,7 +35,10 @@ function reloadActivePage() {
   }
   if (activePage === 'start-page') {
     loadStartPage();
-  } 
+  }
+  if (activePage === 'how-to-play-page') {
+    loadHowToPlayPage();
+  }
 }
 
 function loadStartPage() {
@@ -84,20 +87,37 @@ function loadHowToPlayPage() {
     <button class="btn-back-to-start small-btn">Back to start</button>
     <div id="how-to-play"><h2>How to play</h2>
       Pick two cards.<br>
-      The cards will be turned over and the back side will show.<br>
-      If the images on the backsides are identical the cards will be removed
+      The cards will be turned over and you can see the image on the back of the cards.<br>
+      If the images are identical the cards will be removed
       and you just pick another pair of cards.<br>
       If the two cards are not identical, the cards will flip back.<br>
+      Try to remember where to find the different images.<br>
       Just go on and pick pairs of cards until all the cards have been
       removed from the screen.<br><br>
       The number of moves will be counted. Try to clear the board in less
       moves the next time. <br><br>
-      You can choose the size of the board under <span>"Choose board size"</span><br>
-      Fewer cards makes the game easier. More cards makes it harder.
+      You can choose the size of the board with the <span>"Choose board size"</span> buttons.<br>
+      Smaller board makes the game easier. Bigger board makes it harder.
     </div>
   `;
   // Add id to the section element
   section.id = 'how-to-play-page';
+
+  // If statement which solves responsiveness of how to play element when it's hight gets
+  // too big for the screen
+  getScreenSize();
+  let howToPlayHeight = section.children[1].offsetHeight;
+  let howToPlayTop = section.children[1].offsetTop;
+  let headerOneHeight = document.getElementsByTagName('h1')[0].offsetHeight;
+
+  if (screenHeight < howToPlayHeight + howToPlayTop + headerOneHeight + 30) {
+    section.style.height = (howToPlayHeight + howToPlayTop + 30)+ 'px';
+    console.log(howToPlayHeight);
+    console.log(howToPlayTop);
+    console.log(section.style.height);
+  } else {
+    section.style.height = '100%';
+  }  
 
   // Add event listener to buttons on the how to play page
   let startPageButton = section.children[0];
