@@ -267,3 +267,10 @@ button[data-size='[6, 8]'] {
         background: url('../images/header-3.png') center center;
     }
 }
+
+/* For screen height max 550px */
+@media screen and (max-height: 550px) {
+    #choose-board-size-page {
+        height: 550px;
+    }
+}

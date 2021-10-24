@@ -141,9 +141,12 @@ function loadChooseBoardSizePage() {
     <button class="btn-play-game large-btn">PLAY GAME</button>
   `;
 
-  let buttons = section.getElementsByTagName('button');
+  // Add id to the section element
+  section.id = 'choose-board-size-page';
 
   // Add background color to the button with the active board size 
+  let buttons = section.getElementsByTagName('button');
+
   for (let button of buttons) {
     if (button.getAttribute('data-size') === boardSize){
       button.style.backgroundColor = darkColor;
