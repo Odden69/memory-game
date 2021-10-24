@@ -1,10 +1,10 @@
 // Declare game variables
-let boardSize = '[4, 5]';  // Default size of board. Later chosen by player
-let numberOfCards = 0;     // Number of cards on the board
+let boardSize = '[4, 5]'; // Default size of board. Later chosen by player
+let numberOfCards = 0; // Number of cards on the board
 const darkColor = '#193C32';
 const lightColor = '#F0F2DC';
-let numberOfMoves = 0;     // Number of pairs picked by the player
-let activePage = '';       // Is set to indicate which game page is currently active  
+let numberOfMoves = 0; // Number of pairs picked by the player
+let activePage = ''; // Is set to indicate which game page is currently active  
 
 // Max screen width used for the game area is 600px
 let screenWidth = 0;
@@ -12,11 +12,11 @@ let screenHeight = 0;
 
 function getScreenSize() {
   if (screenWidth > 600) {
-      screenWidth = 600;
+    screenWidth = 600;
   } else {
-    screenWidth = screen.width;
+    screenWidth = screen.availWidth;
   }
-  screenHeight = screen.height;
+  screenHeight = screen.availHeight;
 }
 
 // Wait for the DOM to finish loading before adding
@@ -111,13 +111,10 @@ function loadHowToPlayPage() {
   let headerOneHeight = document.getElementsByTagName('h1')[0].offsetHeight;
 
   if (screenHeight < howToPlayHeight + howToPlayTop + headerOneHeight + 30) {
-    section.style.height = (howToPlayHeight + howToPlayTop + 30)+ 'px';
-    console.log(howToPlayHeight);
-    console.log(howToPlayTop);
-    console.log(section.style.height);
+    section.style.height = (howToPlayHeight + howToPlayTop + 30) + 'px';
   } else {
     section.style.height = '100%';
-  }  
+  }
 
   // Add event listener to buttons on the how to play page
   let startPageButton = section.children[0];
@@ -148,7 +145,7 @@ function loadChooseBoardSizePage() {
   let buttons = section.getElementsByTagName('button');
 
   for (let button of buttons) {
-    if (button.getAttribute('data-size') === boardSize){
+    if (button.getAttribute('data-size') === boardSize) {
       button.style.backgroundColor = darkColor;
       button.style.color = lightColor;
     };
@@ -157,11 +154,11 @@ function loadChooseBoardSizePage() {
   // Add event listener to buttons on the choose board size page
   // and set color of the selected board size button
   for (let button of buttons) {
-    button.addEventListener('click', function(){
+    button.addEventListener('click', function () {
       if (this.className.split(' ')[0] === 'btn-play-game') {
         loadPlayGamePage();
       } else {
-        for (let i = 0; i<buttons.length; i++) {
+        for (let i = 0; i < buttons.length; i++) {
           buttons[i].style.backgroundColor = lightColor;
           buttons[i].style.color = darkColor;
         }
@@ -176,9 +173,9 @@ function loadChooseBoardSizePage() {
 
 function loadPlayGamePage() {
   activePage = 'play-game-page';
-  
+
   // Declare available images array
-let allImages = [
+  let allImages = [
     'building blocks',
     'abacus',
     'dinosaur',
@@ -203,7 +200,7 @@ let allImages = [
     'toy train',
     'slide',
     'bathing ball',
-]
+  ]
 
   // Create the section element for the play game page and define the first part
   let section = document.getElementsByTagName('section')[0];
@@ -239,20 +236,12 @@ let allImages = [
   let buttonHeight = document.getElementsByTagName('button')[0].offsetHeight;
   let availableScreenHeight = screenHeight - (headerOneHeight + headerTwoHeight + headerThreeHeight + buttonHeight);
 
-  console.log('headerOneHeight' + headerOneHeight);
-  console.log('headerTwoHeight' + headerTwoHeight);
-  console.log('headerThreeHeight' + headerThreeHeight);
-  console.log('ScreenHeight' + screenHeight);
-  console.log('ButtonHeight' + buttonHeight);
-console.log('availableScreenHeight' + availableScreenHeight);
   // To decide the size of the board and if the board should be turned sideways,
   // compare the size of the individual cards
   let compareWidth = screenWidth * 0.9 / boardSize[1];
-  let compareHeight = availableScreenHeight * 0.9 / boardSize[4]; 
+  let compareHeight = availableScreenHeight * 0.9 / boardSize[4];
   let compareWidthTurned = screenWidth * 0.9 / boardSize[4];
   let compareHeightTurned = availableScreenHeight * 0.9 / boardSize[1];
-
-  console.log('cw' + compareWidth + 'ch' + compareHeight + 'cwt' + compareWidthTurned + 'cht' + compareHeightTurned);
 
   let normalSize = 1;
   let normalHeight = 1;
@@ -276,7 +265,7 @@ console.log('availableScreenHeight' + availableScreenHeight);
   // If the board is turned, is it the height or the width that limits
   // the size of the board?
   if (compareHeightTurned < compareWidthTurned) {
-    turnedSize = compareHeightTurned * boardSize[1] *compareHeightTurned * boardSize[4];
+    turnedSize = compareHeightTurned * boardSize[1] * compareHeightTurned * boardSize[4];
     turnedHeight = compareHeightTurned * boardSize[1];
     turnedWidth = compareHeightTurned * boardSize[4];
   } else {
@@ -284,8 +273,7 @@ console.log('availableScreenHeight' + availableScreenHeight);
     turnedHeight = compareWidthTurned * boardSize[1];
     turnedWidth = compareWidthTurned * boardSize[4];
   }
-  console.log('normalSize' + normalSize);
-  console.log('turnedSize' + turnedSize);
+
   // Turned or unturned - which gives the largest board?
   // Decide board height and width from that
   if (normalSize > turnedSize) {
@@ -295,14 +283,14 @@ console.log('availableScreenHeight' + availableScreenHeight);
     gameBoardHeight = normalHeight;
   } else {
     columns = boardSize[4];
-    rows =  boardSize[1];
+    rows = boardSize[1];
     gameBoardWidth = turnedWidth;
     gameBoardHeight = turnedHeight;
   }
-console.log(columns);
+
   // Set the width and height of the game board div element
   let boardDiv = section.getElementsByTagName('div')[0];
-  
+
   boardDiv.style.width = gameBoardWidth + 'px';
   boardDiv.style.height = gameBoardHeight + 'px';
 
@@ -321,21 +309,21 @@ console.log(columns);
 
   for (i = 0; i < numberOfCards / 2; i++) {
     let randomIndex = Math.floor(Math.random() * availableImages.length); //Pick a random index number
-    let randomImage = availableImages[randomIndex];         // What available image has that index number?
-    availableImages.splice(randomIndex, 1);                 // Remove that image from the available array
-    images.push(randomImage);                               // Push that image to the image array          
+    let randomImage = availableImages[randomIndex]; // What available image has that index number?
+    availableImages.splice(randomIndex, 1); // Remove that image from the available array
+    images.push(randomImage); // Push that image to the image array          
   }
 
-  images = images.concat(images);  //Double the image array to get a pair of each image
+  images = images.concat(images); //Double the image array to get a pair of each image
 
   // Randomize the array of image numbers using Durstenfeld shuffle algorithm 
   // to get a chuffled deck of cards
   // Found on https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array 
   for (let i = (numberOfCards - 1); i > 0; i--) {
-    let j = Math.floor(Math.random() * (i+1));
+    let j = Math.floor(Math.random() * (i + 1));
     let temp = images[i];
     images[i] = images[j];
-    images[j] = temp; 
+    images[j] = temp;
   }
 
   // Add HTML code for each card 
@@ -344,7 +332,6 @@ console.log(columns);
   for (let i = 0; i < numberOfCards; i++) {
     let image = images[i];
     let cardWidth = gameBoardWidth / columns * 0.94;
-    console.log(cardWidth);
     let cardId = 'card' + i;
     let cardHtml = `
       <div id="${cardId}" class="card-cont" style="width: ${cardWidth}px; height: ${cardWidth}px;">
@@ -355,7 +342,7 @@ console.log(columns);
       </div>`;
     cardsHtml += cardHtml;
   }
-  
+
   // Add the card elements to the game-board div
   section.children[1].innerHTML = cardsHtml;
 
@@ -367,8 +354,8 @@ console.log(columns);
 let idFirstCard = '';
 let idSecondCard = '';
 let cardsMatched = [];
-let imageSecondCard='';
-let imageFirstCard='';
+let imageSecondCard = '';
+let imageFirstCard = '';
 
 function selectFirstCard() {
   if (cardsMatched.length === numberOfCards) {
@@ -382,7 +369,7 @@ function selectFirstCard() {
         card.addEventListener('click', firstSelected);
       }
     }
-  }  
+  }
 }
 
 // Find the id and the img of the first picked card and remove the 
@@ -399,19 +386,19 @@ function firstSelected() {
 // Delete the firstSelected eventlisteners from all cards and add a new
 // eventlistener to all cards except the ones that has already been matched
 // and the just previously choosen card
-function selectSecondCard(){
-  for(let i = 0; i < numberOfCards; i++) {
+function selectSecondCard() {
+  for (let i = 0; i < numberOfCards; i++) {
     let card = document.getElementById('card' + i);
     card.removeEventListener('click', firstSelected);
   }
-  for(let j = 0; j < numberOfCards; j++) {
+  for (let j = 0; j < numberOfCards; j++) {
     let card = document.getElementById('card' + j);
     if (cardsMatched.includes(card.id) || card.id === idFirstCard) {
       continue;
     } else {
       card.addEventListener('click', secondSelected);
     }
-  }  
+  }
 }
 
 // Find the id and the img of the second picked card
@@ -472,7 +459,7 @@ function gameFinished() {
   section.innerHTML += html;
   let quitGameButton = section.getElementsByTagName('button')[0];
   quitGameButton.removeEventListener('click', quitGame);
-  
+
   // Add eventlisteners to the buttons on the game finished note
   let playAgainButton = section.getElementsByTagName('button')[1];
   let chooseBoardSizeButton = section.getElementsByTagName('button')[2];
@@ -495,7 +482,7 @@ function quitGame() {
 }
 
 function playAgain() {
-  resetGame(); 
+  resetGame();
   loadPlayGamePage();
 }
 
