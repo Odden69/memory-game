@@ -6,7 +6,20 @@ let unmarkedButtonColor = '#F0F2DC'; // Color of a non selected button
 const lightText = unmarkedButtonColor;
 const darkText = markedButtonColor;
 let numberOfMoves = 0;   // Number of pairs picked by the player
-let gameBoardPage = false; // When true, eventlistener 'resize' is enabled 
+let activePage;     // Is set to indicate which game page is currently active  
+
+// Max screen width used for the game area is 600px
+let screenWidth = 0;
+let screenHeight = 0;
+
+function getScreenSize() {
+  if (screenWidth > 600) {
+      screenWidth = 600;
+  } else {
+    screenWidth = screen.width;
+  }
+  screenHeight = screen.height;
+}
 
 // Declare available images array
 let allImages = [
@@ -42,17 +55,22 @@ document.addEventListener("DOMContentLoaded", function () {
   loadStartPage();
 });
 
-// Let a screen resize trigger a reload of the screen when the player
-// is on the gameboard page
+// Let a screen resize trigger a reload of the active screen
+// Only enabled for the pages where it is needed
+window.addEventListener("resize", reloadActivePage);
 
-window.addEventListener("resize", reloadGamePage);
-function reloadGamePage() {
-  if (gameBoardPage) {
+function reloadActivePage() {
+  if (activePage === 'play-game-page') {
     loadPlayGamePage();
   }
+  if (activePage === 'start-page') {
+    loadStartPage();
+  } 
 }
 
 function loadStartPage() {
+  activePage = 'start-page';
+
   // Create the section element for the start page 
   let section = document.getElementsByTagName('section')[0];
   section.innerHTML = `
@@ -64,8 +82,18 @@ function loadStartPage() {
     </div>
     <img id="start-page-image" src="assets/images/start-page-image.png" alt="Picture of the game board">
   `;
-  // Add id to the section element
-  section.id = 'start-page';
+
+  // If statement which solves responsiveness of start-page-image for tall narrow screens
+  getScreenSize();
+  let screenRatio = screenHeight / screenWidth;
+
+  if (screenRatio > 2.2) {
+    section.children[2].style.height = 'auto';
+    section.children[2].style.width = '90%';
+  } else {
+    section.children[2].style.height = '35%';
+    section.children[2].style.width = 'auto';
+  }
 
   // Add event listener to buttons on the start page
   let howToPlayButton = section.children[1].children[0];
@@ -78,6 +106,8 @@ function loadStartPage() {
 }
 
 function loadHowToPlayPage() {
+  activePage = 'how-to-play-page';
+
   // Create the section element for the how to play page 
   let section = document.getElementsByTagName('section')[0];
   section.innerHTML = `
@@ -108,6 +138,8 @@ function loadHowToPlayPage() {
 }
 
 function loadChooseBoardSizePage() {
+  activePage = 'choose-board-size-page';
+
   // Create the section element for the choose board size page 
   let section = document.getElementsByTagName('section')[0];
   section.innerHTML = `
@@ -118,8 +150,6 @@ function loadChooseBoardSizePage() {
     <button data-size='[6, 8]' class="small-btn">6 x 8</button>
     <button class="btn-play-game large-btn">PLAY GAME</button>
   `;
-  // Add id to the section element
-  section.id = 'choose-board-size-page';
 
   let buttons = section.getElementsByTagName('button');
 
@@ -152,7 +182,7 @@ function loadChooseBoardSizePage() {
 }
 
 function loadPlayGamePage() {
-  gameBoardPage = true; // Set to true, to enable reload of playGamePage when screen is resized
+  activePage = 'play-game-page';
 
   // Create the section element for the play game page and define the first part
   let section = document.getElementsByTagName('section')[0];
@@ -171,22 +201,15 @@ function loadPlayGamePage() {
 
   quitGameButton.addEventListener('click', quitGame);
 
-  // Set height and width of the game board
-  // The number of cards is selected by player
+  // Set height and width of the game board 
+  // The number of cards is default or selected by player
+  getScreenSize();
 
   let gameBoardWidth = 1; // Resulting board width in px
   let gameBoardHeight = 1; // Resulting board height in px
   let columns = 1; // Resulting number of columns
   let rows = 1; // Resulting number of rows
 
-  // Use the actual screen size to get the size of the board
-  let screenWidth = screen.width;
-  let screenHeight = screen.height;
-  
-  // Max screen width 600px
-  if (screenWidth > 600) {
-    screenWidth = 600;
-  }
   // The height of the screen needs to be reduces by the height of the headers
   // and the quit game button to get the available board height
   let headerOneHeight = document.getElementsByTagName('h1')[0].offsetHeight;
@@ -447,7 +470,6 @@ function resetGame() {
 
 function quitGame() {
   resetGame();
-  gameBoardPage = false;
   loadStartPage();
 }
 
@@ -458,6 +480,5 @@ function playAgain() {
 
 function changeSize() {
   resetGame();
-  gameBoardPage = false;
   loadChooseBoardSizePage();
 }
