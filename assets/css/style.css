@@ -226,3 +226,38 @@ button[data-size='[6, 8]'] {
 #btn-gf-back-to-start {
     top: 75%;
 }
+
+/* Media queries*/
+
+/* For screen height min 550px */
+@media screen and (min-height: 550px) {
+    #start-page-button-cont {
+        height: 40%;
+    }
+
+    #first-page-image {
+        display: block;
+    }
+}
+
+/* For screen height min 800px */
+@media screen and (min-height: 800px) {
+    #start-page-button-cont {
+        height: 300px;
+    }
+}
+
+
+/* For screen width min 400px */
+@media screen and (min-width: 400px) {
+    header h1 {
+        background: url('../images/header-2.png') center center;
+    }
+}
+
+/* For screen width min 515px */
+@media screen and (min-width: 515px) {
+    header h1 {
+        background: url('../images/header-3.png') center center;
+    }
+}
