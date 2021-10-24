@@ -1,12 +1,10 @@
 // Declare game variables
 let boardSize = '[4, 5]';  // Default size of board. Later chosen by player
-let numberOfCards = 0;   // Number of cards on the board
-const markedButtonColor = '#193C32';   // Color of a selected button
-let unmarkedButtonColor = '#F0F2DC'; // Color of a non selected button
-const lightText = unmarkedButtonColor;
-const darkText = markedButtonColor;
-let numberOfMoves = 0;   // Number of pairs picked by the player
-let activePage;     // Is set to indicate which game page is currently active  
+let numberOfCards = 0;     // Number of cards on the board
+const darkColor = '#193C32';
+const lightColor = '#F0F2DC';
+let numberOfMoves = 0;     // Number of pairs picked by the player
+let activePage = '';       // Is set to indicate which game page is currently active  
 
 // Max screen width used for the game area is 600px
 let screenWidth = 0;
@@ -20,34 +18,6 @@ function getScreenSize() {
   }
   screenHeight = screen.height;
 }
-
-// Declare available images array
-let allImages = [
-  'building blocks',
-  'abacus',
-  'dinosaur',
-  'blue car',
-  'rubber duck',
-  'bike',
-  'toy airplane',
-  'teddy bear',
-  'cube',
-  'yellow car',
-  'toy boat',
-  'helicopter',
-  'circus tent',
-  'black board',
-  'ball',
-  'paint bucket',
-  'pterosaur',
-  'tricycle',
-  'maracas',
-  'lego',
-  'globe',
-  'toy train',
-  'slide',
-  'bathing ball',
-]
 
 // Wait for the DOM to finish loading before adding
 // the section element for the first page to the html
@@ -156,8 +126,8 @@ function loadChooseBoardSizePage() {
   // Add background color to the button with the active board size 
   for (let button of buttons) {
     if (button.getAttribute('data-size') === boardSize){
-      button.style.backgroundColor = markedButtonColor;
-      button.style.color = lightText;
+      button.style.backgroundColor = darkColor;
+      button.style.color = lightColor;
     };
   }
 
@@ -169,11 +139,11 @@ function loadChooseBoardSizePage() {
         loadPlayGamePage();
       } else {
         for (let i = 0; i<buttons.length; i++) {
-          buttons[i].style.backgroundColor = unmarkedButtonColor;
-          buttons[i].style.color = darkText;
+          buttons[i].style.backgroundColor = lightColor;
+          buttons[i].style.color = darkColor;
         }
-        this.style.backgroundColor = markedButtonColor;
-        this.style.color = lightText;
+        this.style.backgroundColor = darkColor;
+        this.style.color = lightColor;
         boardSize = this.getAttribute('data-size');
         defValue = false;
       }
@@ -183,6 +153,34 @@ function loadChooseBoardSizePage() {
 
 function loadPlayGamePage() {
   activePage = 'play-game-page';
+  
+  // Declare available images array
+let allImages = [
+    'building blocks',
+    'abacus',
+    'dinosaur',
+    'blue car',
+    'rubber duck',
+    'bike',
+    'toy airplane',
+    'teddy bear',
+    'cube',
+    'yellow car',
+    'toy boat',
+    'helicopter',
+    'circus tent',
+    'black board',
+    'ball',
+    'paint bucket',
+    'pterosaur',
+    'tricycle',
+    'maracas',
+    'lego',
+    'globe',
+    'toy train',
+    'slide',
+    'bathing ball',
+]
 
   // Create the section element for the play game page and define the first part
   let section = document.getElementsByTagName('section')[0];
