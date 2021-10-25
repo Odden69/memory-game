@@ -11,12 +11,12 @@ let screenWidth = 0;
 let screenHeight = 0;
 
 function getScreenSize() {
-  if (screen.width > 600) {
+  if (window.innerWidth > 600) {
     screenWidth = 600;
   } else {
-    screenWidth = screen.width;
+    screenWidth = window.innerWidth;
   }
-  screenHeight = screen.height;
+  screenHeight = window.innerHeight;
 }
 
 // Wait for the DOM to finish loading before adding
@@ -242,7 +242,7 @@ function calcBoardSize() {
     gameBoardHeight = turnedHeight;
   }
 
-  cardWidth = (gameBoardWidth - (columns - 1) * 4.2) / columns;
+  cardWidth = (gameBoardWidth - (columns - 1) * 4.6) / columns;
 }
 
 function loadPlayGamePage() {
