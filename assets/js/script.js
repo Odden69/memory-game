@@ -11,7 +11,7 @@ let screenWidth = 0;
 let screenHeight = 0;
 
 function getScreenSize() {
-  if (screenWidth > 600) {
+  if (screen.width > 600) {
     screenWidth = 600;
   } else {
     screenWidth = screen.width;
