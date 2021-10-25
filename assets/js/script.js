@@ -427,26 +427,32 @@ function compareCards() {
     let card = document.getElementById('card' + i);
     card.removeEventListener('click', secondSelected);
   }
-  numberOfMoves++;
+  // Update number of moves variable and show it to the player
+  numberOfMoves++; 
   document.getElementById('number-of-moves').innerHTML = `<h3 id="number-of-moves">Number of moves: ${numberOfMoves}</h3>`
+  
   if (imageFirstCard === imageSecondCard) {
     function hideCards() {
-      document.getElementById(idFirstCard).style.visibility = "hidden";
-      document.getElementById(idSecondCard).style.visibility = "hidden";
-      selectFirstCard();
+      if (document.getElementById(idFirstCard) !== null) {
+        document.getElementById(idFirstCard).style.visibility = "hidden";
+        document.getElementById(idSecondCard).style.visibility = "hidden";
+        selectFirstCard();
+      }
     }
     //The setTimeout method was found on https://www.w3schools.com/jsref/met_win_settimeout.asp
-    setTimeout(hideCards, 1000);
+    setTimeout(hideCards, 950);
     cardsMatched.push(idFirstCard, idSecondCard);
   } else {
     function turnCards() {
-      let firstCard = document.getElementById(idFirstCard);
-      let secondCard = document.getElementById(idSecondCard);
-      firstCard.getElementsByClassName('inner-card-cont')[0].style.transform = 'none';
-      secondCard.getElementsByClassName('inner-card-cont')[0].style.transform = 'none';
-      selectFirstCard();
+      if (document.getElementById(idFirstCard) !== null) {
+        let firstCard = document.getElementById(idFirstCard);
+        let secondCard = document.getElementById(idSecondCard);
+        firstCard.getElementsByClassName('inner-card-cont')[0].style.transform = 'none';
+        secondCard.getElementsByClassName('inner-card-cont')[0].style.transform = 'none';
+        selectFirstCard();
+      }
     }
-    setTimeout(turnCards, 2500);
+    setTimeout(turnCards, 2000);
   }
 }
 
