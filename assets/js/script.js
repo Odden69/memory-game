@@ -473,7 +473,7 @@ function reloadPlayGamePage() {
 function gameFinished() {
   // HTML code to post a game finished note
   let html = `
-    <div id="dimmed-background"></div>
+    <div id="game-finished-background"></div>
     <div id="game-finished">
       <h2>Good job!</h2>
       <h3>You finished the game in ${numberOfMoves} moves!</h3>

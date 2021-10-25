@@ -26,7 +26,7 @@ header h1 {
 section {
     width: 100%;
     height: 100%;
-    background-color: #689694;
+    background-color: #87BFBB;
     position: relative;
 }
 
@@ -161,7 +161,7 @@ button[data-size='[6, 8]'] {
 #game-board {
     width: 90%;
     margin: 0 auto;
-    background-color: #689694;
+    background-color: #87BFBB;
 }
 
 .card-cont {
@@ -203,13 +203,13 @@ button[data-size='[6, 8]'] {
 }
 
 /* Game Finished note */
-#dimmed-background {
+#game-finished-background {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(139, 139, 139, 0.85);
+    background: #87BFBB;
     z-index: 100;
 }
 
@@ -217,11 +217,11 @@ button[data-size='[6, 8]'] {
     position: absolute;
     top: 8%;
     left: calc(50% - 120px);
-    width: 240px;
+    width: 280px;
     height: 400px;
-    background: #F7FCE2;
+    background: #87BFBB;
     color: #193C32;
-    z-index: 101;
+    z-index: 100;
 }
 
 #btn-gf-play-again {
@@ -229,7 +229,7 @@ button[data-size='[6, 8]'] {
 }
 
 #btn-gf-choose-board-size {
-    top: 50%;
+    top: 52%;
 }
 
 #btn-gf-back-to-start {
