@@ -136,6 +136,7 @@ function loadChooseBoardSizePage() {
     <button data-size='[5, 6]' class="small-btn">5 x 6</button>
     <button data-size='[6, 8]' class="small-btn">6 x 8</button>
     <button class="btn-play-game large-btn">PLAY GAME</button>
+    <button class="btn-back-to-start small-btn">Back to start</button>
   `;
 
   // Add id to the section element

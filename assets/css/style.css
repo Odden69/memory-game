@@ -149,7 +149,12 @@ button[data-size='[6, 8]'] {
 }
 
 #choose-board-size-page .btn-play-game {
-    top: 75%;
+    top: 62%;
+}
+
+#choose-board-size-page .btn-back-to-start {
+    top: 80%;
+    width: 200px;
 }
 
 /* play game page */
