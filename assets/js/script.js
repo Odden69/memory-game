@@ -14,9 +14,9 @@ function getScreenSize() {
   if (screenWidth > 600) {
     screenWidth = 600;
   } else {
-    screenWidth = screen.availWidth;
+    screenWidth = screen.width;
   }
-  screenHeight = screen.availHeight;
+  screenHeight = screen.height;
 }
 
 // Wait for the DOM to finish loading before adding
@@ -31,7 +31,7 @@ window.addEventListener("resize", reloadActivePage);
 
 function reloadActivePage() {
   if (activePage === 'play-game-page') {
-    loadPlayGamePage();
+    reloadPlayGamePage();
   }
   if (activePage === 'start-page') {
     loadStartPage();
@@ -171,6 +171,80 @@ function loadChooseBoardSizePage() {
   }
 }
 
+// Calculate the size and format of the game board depending on the
+// screen size and the user's choice of board size.
+let gameBoardWidth = 1; // Resulting board width in px
+let gameBoardHeight = 1; // Resulting board height in px
+let columns = 1; // Resulting number of columns
+let rows = 1; // Resulting number of rows
+let cardWidth = 1; // Width of an individual card
+
+function calcBoardSize() {
+  getScreenSize();
+
+  // The height of the screen needs to be reduces by the height of the headers
+  // and the quit game button to get the available board height
+  let headerOneHeight = document.getElementsByTagName('h1')[0].offsetHeight;
+  let headerTwoHeight = document.getElementsByTagName('h3')[0].offsetHeight;
+  let headerThreeHeight = document.getElementsByTagName('h3')[1].offsetHeight;
+  let buttonHeight = document.getElementsByTagName('button')[0].offsetHeight;
+  let availableBoardHeight = screenHeight - (headerOneHeight + headerTwoHeight + headerThreeHeight + buttonHeight);
+
+  // To decide the size of the board and if the board should be turned sideways,
+  // compare the size of the individual cards
+  let compareWidth = screenWidth * 0.9 / boardSize[1];
+  let compareHeight = availableBoardHeight * 0.9 / boardSize[4];
+  let compareWidthTurned = screenWidth * 0.9 / boardSize[4];
+  let compareHeightTurned = availableBoardHeight * 0.9 / boardSize[1];
+
+  let normalSize = 1;
+  let normalHeight = 1;
+  let normalWidth = 1;
+  let turnedSize = 1;
+  let turnedHeight = 1;
+  let turnedWidth = 1;
+
+  // If the board is unturned, is it the height or the width that limits
+  // the size of the board?
+  if (compareHeight < compareWidth) {
+    normalSize = compareHeight * boardSize[4] * compareHeight * boardSize[1];
+    normalHeight = compareHeight * boardSize[4];
+    normalWidth = compareHeight * boardSize[1];
+  } else {
+    normalSize = compareWidth * boardSize[4] * compareWidth * boardSize[1];
+    normalHeight = compareWidth * boardSize[4];
+    normalWidth = compareWidth * boardSize[1];
+  }
+
+  // If the board is turned, is it the height or the width that limits
+  // the size of the board?
+  if (compareHeightTurned < compareWidthTurned) {
+    turnedSize = compareHeightTurned * boardSize[1] * compareHeightTurned * boardSize[4];
+    turnedHeight = compareHeightTurned * boardSize[1];
+    turnedWidth = compareHeightTurned * boardSize[4];
+  } else {
+    turnedSize = compareWidthTurned * boardSize[1] * compareWidthTurned * boardSize[4];
+    turnedHeight = compareWidthTurned * boardSize[1];
+    turnedWidth = compareWidthTurned * boardSize[4];
+  }
+
+  // Turned or unturned - which gives the largest board?
+  // Decide board height and width from that
+  if (normalSize > turnedSize) {
+    columns = boardSize[1];
+    rows = boardSize[4];
+    gameBoardWidth = normalWidth;
+    gameBoardHeight = normalHeight;
+  } else {
+    columns = boardSize[4];
+    rows = boardSize[1];
+    gameBoardWidth = turnedWidth;
+    gameBoardHeight = turnedHeight;
+  }
+
+  cardWidth = gameBoardWidth / columns * 0.94;
+}
+
 function loadPlayGamePage() {
   activePage = 'play-game-page';
 
@@ -219,74 +293,7 @@ function loadPlayGamePage() {
 
   quitGameButton.addEventListener('click', quitGame);
 
-  // Set height and width of the game board 
-  // The number of cards is default or selected by player
-  getScreenSize();
-
-  let gameBoardWidth = 1; // Resulting board width in px
-  let gameBoardHeight = 1; // Resulting board height in px
-  let columns = 1; // Resulting number of columns
-  let rows = 1; // Resulting number of rows
-
-  // The height of the screen needs to be reduces by the height of the headers
-  // and the quit game button to get the available board height
-  let headerOneHeight = document.getElementsByTagName('h1')[0].offsetHeight;
-  let headerTwoHeight = document.getElementsByTagName('h3')[0].offsetHeight;
-  let headerThreeHeight = document.getElementsByTagName('h3')[1].offsetHeight;
-  let buttonHeight = document.getElementsByTagName('button')[0].offsetHeight;
-  let availableScreenHeight = screenHeight - (headerOneHeight + headerTwoHeight + headerThreeHeight + buttonHeight);
-
-  // To decide the size of the board and if the board should be turned sideways,
-  // compare the size of the individual cards
-  let compareWidth = screenWidth * 0.9 / boardSize[1];
-  let compareHeight = availableScreenHeight * 0.9 / boardSize[4];
-  let compareWidthTurned = screenWidth * 0.9 / boardSize[4];
-  let compareHeightTurned = availableScreenHeight * 0.9 / boardSize[1];
-
-  let normalSize = 1;
-  let normalHeight = 1;
-  let normalWidth = 1;
-  let turnedSize = 1;
-  let turnedHeight = 1;
-  let turnedWidth = 1;
-
-  // If the board is unturned, is it the height or the width that limits
-  // the size of the board?
-  if (compareHeight < compareWidth) {
-    normalSize = compareHeight * boardSize[4] * compareHeight * boardSize[1];
-    normalHeight = compareHeight * boardSize[4];
-    normalWidth = compareHeight * boardSize[1];
-  } else {
-    normalSize = compareWidth * boardSize[4] * compareWidth * boardSize[1];
-    normalHeight = compareWidth * boardSize[4];
-    normalWidth = compareWidth * boardSize[1];
-  }
-
-  // If the board is turned, is it the height or the width that limits
-  // the size of the board?
-  if (compareHeightTurned < compareWidthTurned) {
-    turnedSize = compareHeightTurned * boardSize[1] * compareHeightTurned * boardSize[4];
-    turnedHeight = compareHeightTurned * boardSize[1];
-    turnedWidth = compareHeightTurned * boardSize[4];
-  } else {
-    turnedSize = compareWidthTurned * boardSize[1] * compareWidthTurned * boardSize[4];
-    turnedHeight = compareWidthTurned * boardSize[1];
-    turnedWidth = compareWidthTurned * boardSize[4];
-  }
-
-  // Turned or unturned - which gives the largest board?
-  // Decide board height and width from that
-  if (normalSize > turnedSize) {
-    columns = boardSize[1];
-    rows = boardSize[4];
-    gameBoardWidth = normalWidth;
-    gameBoardHeight = normalHeight;
-  } else {
-    columns = boardSize[4];
-    rows = boardSize[1];
-    gameBoardWidth = turnedWidth;
-    gameBoardHeight = turnedHeight;
-  }
+  calcBoardSize();
 
   // Set the width and height of the game board div element
   let boardDiv = section.getElementsByTagName('div')[0];
@@ -326,12 +333,13 @@ function loadPlayGamePage() {
     images[j] = temp;
   }
 
+  console.log(images);
+
   // Add HTML code for each card 
   let cardsHtml = '';
 
   for (let i = 0; i < numberOfCards; i++) {
     let image = images[i];
-    let cardWidth = gameBoardWidth / columns * 0.94;
     let cardId = 'card' + i;
     let cardHtml = `
       <div id="${cardId}" class="card-cont" style="width: ${cardWidth}px; height: ${cardWidth}px;">
@@ -442,6 +450,26 @@ function compareCards() {
   }
 }
 
+// Recalculate the boardsize and cardwidth to adopt to a resized screen
+function reloadPlayGamePage() {
+  calcBoardSize();
+
+  // Set the width and height of the game board div element
+  let boardDiv = document.getElementById('game-board');
+
+  boardDiv.style.width = gameBoardWidth + 'px';
+  boardDiv.style.height = gameBoardHeight + 'px';
+
+  // Give each card its new cardwidth
+  for (let i = 0; i < numberOfCards; i++) {
+    let cardId = 'card' + i;
+    let card = document.getElementById(cardId);
+    card.style.width = cardWidth + 'px';
+    card.style.height = cardWidth + 'px';
+  }
+
+}
+
 function gameFinished() {
   // HTML code to post a game finished note
   let html = `
@@ -467,7 +495,7 @@ function gameFinished() {
 
   chooseBoardSizeButton.addEventListener('click', changeSize);
   playAgainButton.addEventListener('click', playAgain);
-  backToStartButton.addEventListener('click', loadStartPage);
+  backToStartButton.addEventListener('click', quitGame);
 }
 
 function resetGame() {
