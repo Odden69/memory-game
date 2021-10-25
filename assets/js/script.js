@@ -242,7 +242,7 @@ function calcBoardSize() {
     gameBoardHeight = turnedHeight;
   }
 
-  cardWidth = gameBoardWidth / columns * 0.94;
+  cardWidth = (gameBoardWidth - (columns - 1) * 4.2) / columns;
 }
 
 function loadPlayGamePage() {
