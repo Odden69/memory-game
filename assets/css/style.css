@@ -216,7 +216,7 @@ button[data-size='[6, 8]'] {
 #game-finished {
     position: absolute;
     top: 8%;
-    left: calc(50% - 120px);
+    left: calc(50% - 140px);
     width: 280px;
     height: 400px;
     background: #87BFBB;
