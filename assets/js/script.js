@@ -59,6 +59,9 @@ function loadStartPage() {
   // Add id to the section element
   section.id = 'start-page';
 
+  // Set height of section element to 100%
+  section.style.height = '100%';
+
   // If statement which solves responsiveness of start-page-image for tall narrow screens
   getScreenSize();
   let screenRatio = screenHeight / screenWidth;
@@ -106,7 +109,7 @@ function loadHowToPlayPage() {
   // Add id to the section element
   section.id = 'how-to-play-page';
 
-  // If statement which solves responsiveness of how to play element when it's hight gets
+  // If statement which solves responsiveness of how to play element when it's height gets
   // too big for the screen
   getScreenSize();
   let howToPlayHeight = section.children[1].offsetHeight;
@@ -144,6 +147,16 @@ function loadChooseBoardSizePage() {
 
   // Add id to the section element
   section.id = 'choose-board-size-page';
+
+  // If statement which solves responsiveness of choose board size page when the screen
+  // height gets too small
+  getScreenSize();
+
+  if (screenHeight < 525) {
+    section.style.height = 525 + 'px';
+  } else {
+    section.style.height = '100%';
+  }
 
   // Add background color to the button with the active board size 
   let buttons = section.getElementsByTagName('button');
@@ -293,6 +306,9 @@ function loadPlayGamePage() {
   `;
   // Add id to the section element
   section.id = 'play-game-page';
+
+  // Set height of section element to 100%
+  section.style.height = '100%';
 
   // Add eventlistener to quit game button 
   let quitGameButton = section.getElementsByTagName('button')[0];
