@@ -56,6 +56,9 @@ function loadStartPage() {
     <img id="start-page-image" src="assets/images/start-page-image.png" alt="Picture of the game board">
   `;
 
+  // Add id to the section element
+  section.id = 'start-page';
+
   // If statement which solves responsiveness of start-page-image for tall narrow screens
   getScreenSize();
   let screenRatio = screenHeight / screenWidth;
@@ -158,6 +161,8 @@ function loadChooseBoardSizePage() {
     button.addEventListener('click', function () {
       if (this.className.split(' ')[0] === 'btn-play-game') {
         loadPlayGamePage();
+      } else if (this.className.split(' ')[0] === 'btn-back-to-start') {
+        quitGame();
       } else {
         for (let i = 0; i < buttons.length; i++) {
           buttons[i].style.backgroundColor = lightColor;
@@ -430,7 +435,7 @@ function compareCards() {
   }
   // Update number of moves variable and show it to the player
   numberOfMoves++; 
-  document.getElementById('number-of-moves').innerHTML = `<h3 id="number-of-moves">Number of moves: ${numberOfMoves}</h3>`
+  document.getElementById('number-of-moves').innerHTML = `Number of moves: ${numberOfMoves}`;
   
   if (imageFirstCard === imageSecondCard) {
     function hideCards() {
