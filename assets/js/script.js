@@ -62,11 +62,11 @@ function loadStartPage() {
   getScreenSize();
   let screenRatio = screenHeight / screenWidth;
 
-  if (screenRatio > 2.2) {
+  if (screenRatio > 1.6) {
     section.children[2].style.height = 'auto';
     section.children[2].style.width = '90%';
   } else {
-    section.children[2].style.height = '35%';
+    section.children[2].style.height = '40%';
     section.children[2].style.width = 'auto';
   }
 
