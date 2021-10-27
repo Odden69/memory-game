@@ -164,6 +164,8 @@ button[data-size='[6, 8]'] {
     background-color: #87BFBB;
 }
 
+/* The code for flipping an image was found on 
+https://www.w3schools.com/howto/howto_css_flip_image.asp */
 .card-cont {
     background-color: transparent;
     display: inline-block;

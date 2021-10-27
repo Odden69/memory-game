@@ -393,8 +393,10 @@ function selectFirstCard() {
   }
 }
 
-// Find the id and the img of the first picked card, turn it and remove the 
-// eventlistener from the that card
+/* Find the id and the img of the first picked card, turn it and remove the 
+   eventlistener from the that card
+   The code for flipping an image was found on 
+   https://www.w3schools.com/howto/howto_css_flip_image.asp */
 function firstSelected() {
   let src = this.getElementsByTagName('img')[0].src;
   imageFirstCard = src;
