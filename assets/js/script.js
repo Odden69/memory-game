@@ -496,9 +496,9 @@ function gameFinished() {
     <div id="game-finished">
       <h2>Good job!</h2>
       <h3>You finished the game in ${numberOfMoves} moves!</h3>
-      <button id="btn-gf-play-again" class="big-button small-btn">Play again</button>
-      <button id="btn-gf-choose-board-size" class="big-button small-btn">Choose board size</button>
-      <button id="btn-gf-back-to-start" class="big-button small-btn">Back to start</button>
+      <button id="btn-gf-play-again" class="small-btn">Play again</button>
+      <button id="btn-gf-choose-board-size" class="small-btn">Choose board size</button>
+      <button id="btn-gf-back-to-start" class="small-btn">Back to start</button>
     </div>
   `
   // Remove the eventlistener from the original quit game button
