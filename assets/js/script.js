@@ -161,7 +161,7 @@ function loadChooseBoardSizePage() {
     if (button.getAttribute('data-size') === boardSize) {
       button.style.backgroundColor = darkColor;
       button.style.color = lightColor;
-    };
+    }
   }
 
   // Add event listener to buttons on the choose board size page
@@ -180,9 +180,8 @@ function loadChooseBoardSizePage() {
         this.style.backgroundColor = darkColor;
         this.style.color = lightColor;
         boardSize = this.getAttribute('data-size');
-        defValue = false;
       }
-    })
+    });
   }
 }
 
@@ -287,7 +286,7 @@ function loadPlayGamePage() {
     'toy train',
     'slide',
     'bathing ball',
-  ]
+  ];
 
   // Create the section element for the play game page and define the first part
   let section = document.getElementsByTagName('section')[0];
@@ -320,7 +319,7 @@ function loadPlayGamePage() {
   numberOfCards = columns * rows;
   let availableImages = [];
 
-  for (i = 1; i <= allImages.length; i++) {
+  for (let i = 1; i <= allImages.length; i++) {
     availableImages.push(i);
   }
 
@@ -328,7 +327,7 @@ function loadPlayGamePage() {
   // a size depending on the users choice of game board size
   let images = [];
 
-  for (i = 0; i < numberOfCards / 2; i++) {
+  for (let i = 0; i < numberOfCards / 2; i++) {
     let randomIndex = Math.floor(Math.random() * availableImages.length);
     let randomImage = availableImages[randomIndex];
     availableImages.splice(randomIndex, 1);
@@ -500,7 +499,7 @@ function gameFinished() {
       <button id="btn-gf-choose-board-size" class="small-btn">Choose board size</button>
       <button id="btn-gf-back-to-start" class="small-btn">Back to start</button>
     </div>
-  `
+  `;
   // Remove the eventlistener from the original quit game button
   let section = document.getElementsByTagName('section')[0];
   section.innerHTML += html;
