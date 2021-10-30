@@ -166,6 +166,17 @@ function loadChooseBoardSizePage() {
 
   // Add event listener to buttons on the choose board size page
   // and set color of the selected board size button
+  function clearButtons() {
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].style.backgroundColor = lightColor;
+      buttons[i].style.color = darkColor;
+    }
+  }
+
+  function setBoardSize(button) {
+    boardSize = button.getAttribute('data-size');
+  }
+
   for (let button of buttons) {
     button.addEventListener('click', function () {
       if (this.className.split(' ')[0] === 'btn-play-game') {
@@ -173,13 +184,10 @@ function loadChooseBoardSizePage() {
       } else if (this.className.split(' ')[0] === 'btn-back-to-start') {
         quitGame();
       } else {
-        for (let i = 0; i < buttons.length; i++) {
-          buttons[i].style.backgroundColor = lightColor;
-          buttons[i].style.color = darkColor;
-        }
+        clearButtons();
         this.style.backgroundColor = darkColor;
         this.style.color = lightColor;
-        boardSize = this.getAttribute('data-size');
+        setBoardSize(this);
       }
     });
   }
@@ -253,6 +261,7 @@ function calcBoardSize() {
     gameBoardWidth = turnedWidth;
     gameBoardHeight = turnedHeight;
   }
+  
   // The card width calculated from the board width minus an approximation of the gaps between the cards
   cardWidth = (gameBoardWidth - (columns - 1) * 4.6) / columns;
 }
@@ -305,7 +314,6 @@ function loadPlayGamePage() {
   let quitGameButton = section.getElementsByTagName('button')[0];
 
   quitGameButton.addEventListener('click', quitGame);
-
 
   // Set the width and height of the game board div element
   calcBoardSize();
@@ -443,27 +451,29 @@ function compareCards() {
 
   // Compare the image of the two choosen cards
   // If they are identical hide them, if not turn them back
-  if (imageFirstCard === imageSecondCard) {
-    function hideCards() {
-      if (document.getElementById(idFirstCard) !== null) {
-        document.getElementById(idFirstCard).style.visibility = "hidden";
-        document.getElementById(idSecondCard).style.visibility = "hidden";
-        selectFirstCard();
-      }
+  function hideCards() {
+    if (document.getElementById(idFirstCard) !== null) {
+      document.getElementById(idFirstCard).style.visibility = "hidden";
+      document.getElementById(idSecondCard).style.visibility = "hidden";
+      selectFirstCard();
     }
-    //The setTimeout method was found on https://www.w3schools.com/jsref/met_win_settimeout.asp
+  }
+
+  function turnCards() {
+    if (document.getElementById(idFirstCard) !== null) {
+      let firstCard = document.getElementById(idFirstCard);
+      let secondCard = document.getElementById(idSecondCard);
+      firstCard.getElementsByClassName('inner-card-cont')[0].style.transform = 'none';
+      secondCard.getElementsByClassName('inner-card-cont')[0].style.transform = 'none';
+      selectFirstCard();
+    }
+  }
+
+  //The setTimeout method was found on https://www.w3schools.com/jsref/met_win_settimeout.asp
+  if (imageFirstCard === imageSecondCard) {
     setTimeout(hideCards, 950);
     cardsMatched.push(idFirstCard, idSecondCard);
   } else {
-    function turnCards() {
-      if (document.getElementById(idFirstCard) !== null) {
-        let firstCard = document.getElementById(idFirstCard);
-        let secondCard = document.getElementById(idSecondCard);
-        firstCard.getElementsByClassName('inner-card-cont')[0].style.transform = 'none';
-        secondCard.getElementsByClassName('inner-card-cont')[0].style.transform = 'none';
-        selectFirstCard();
-      }
-    }
     setTimeout(turnCards, 2000);
   }
 }
