@@ -104,7 +104,7 @@ function defineHowToPlayPageSectionElement() {
       removed from the screen.<br><br>
       The number of moves will be counted. Try to clear the board in less
       moves the next time. <br><br>
-      You can choose the size of the board with the <span>"Choose board size"</span> buttons.<br>
+      You can choose the size of the board with the "Choose board size" buttons.<br>
       Smaller board makes the game easier. Bigger board makes it harder.
     </div>
   `;
@@ -130,12 +130,10 @@ function loadHowToPlayPage() {
   setSectionClassName();
   setHowToPlayPageSectionHeight();
 
-  // Add event listener to buttons on the how to play page
+  // Add event listener to button on the how to play page
   let startPageButton = section.children[0];
-  let chooseBoardSizeLink = section.getElementsByTagName('span')[0];
 
   startPageButton.addEventListener('click', loadStartPage);
-  chooseBoardSizeLink.addEventListener('click', loadChooseBoardSizePage);
 }
 
 function defineChooseBoardSizePageSectionElement() {

@@ -118,11 +118,6 @@ button {
     margin-bottom: 2px;
 }
 
-.how-to-play span {
-    color: blue;
-    text-decoration: underline;
-}
-
 /* choose board size page */
 .choose-board-size-page h2 {
     padding-top: 15px;
