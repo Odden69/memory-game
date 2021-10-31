@@ -9,7 +9,7 @@ The site's goal is to offer a relaxing game, yet challenging for the mind.
 ### User stories
 - #### First Time Visitor Goals
   - As a first time visitor I want to be able to easily see the purpose of the game and to intuitively be able to figure out how it is played or easily find out how.
-  - As a first time visitor I want to find the environment easy to navigate and the color scheme appealing to the eye.
+  - As a first time visitor I want to find the environment easy to navigate and the colour scheme appealing to the eye.
 
 - #### Returning Visitor Goals
   - As a returning visitor, I want to be able to just play the game without any detours. 
@@ -17,8 +17,7 @@ The site's goal is to offer a relaxing game, yet challenging for the mind.
 
 ### Design
 - #### Colour Scheme
-    The color scheme is chosen to give a soothing feeling and not be a distraction from the challenge of the game and it is consistent throughout the site. 
-    The colors of text and back- and foregrounds follow the recommendations for contrasts.
+    The colour scheme is chosen to give a soothing feeling and not be a distraction from the challenge of the game. It is consistent throughout the site and the colours of text and back- and foregrounds follow the recommendations for contrasts.
     Find the link to the contrast check [here](https://contrast-grid.eightshapes.com/?version=1.1.0&background-colors=&foreground-colors=%23F7FCE2%2C%20Buttons%20and%20header%0D%0A%23193C32%2C%20Text%0D%0A%2387BFBB%2C%20Background%0D%0A&es-color-form__tile-size=compact&es-color-form__show-contrast=aaa&es-color-form__show-contrast=aa&es-color-form__show-contrast=aa18&es-color-form__show-contrast=dnp).
 
 - #### Typography
@@ -29,7 +28,7 @@ The site's goal is to offer a relaxing game, yet challenging for the mind.
         
 ### Wireframes
 The wireframes were made in Balsamiq.  
-The game pages viewed on a mobile device:
+The game pages viewed on a mobile device:  
 ![Wireframes of a mobile screen](assets/images/readme-img/wireframe-1.png)  
 The basic idea of applying the same pages to a larger screen:  
 ![Wireframes of a computer screen](assets/images/readme-img/wireframe-2.png)
@@ -43,8 +42,7 @@ The basic idea of applying the same pages to a larger screen:
 ![The starting page of the game](assets/images/readme-img/start-page.png)
 - On the "how to play" page the player can:
   - Learn how the game is played and what the scoring is based on.  
-  - Go back to the starting page.
-  - Via a link in the text go to the "choose board size" page.  
+  - Go back to the starting page.  
 ![The how to play page](assets/images/readme-img/howtoplay-page.png)
 - The "choose board size" page gives the player an option to choose between different difficult levels by changing the size of the game board:
   - Four different board sizes are provided. The selected board size is highlighted with a switch of text and button colours.  
@@ -88,18 +86,18 @@ The basic idea of applying the same pages to a larger screen:
 - The contrast of the colour scheme was checked on [Contrast Grid](https://contrast-grid.eightshapes.com/?version=1.1.0&background-colors=&foreground-colors=%23F7FCE2%2C%20Buttons%20and%20header%0D%0A%23193C32%2C%20Text%0D%0A%2387BFBB%2C%20Background%0D%0A&es-color-form__tile-size=compact&es-color-form__show-contrast=aaa&es-color-form__show-contrast=aa&es-color-form__show-contrast=aa18&es-color-form__show-contrast=dnp).
 
 ## Testing
-Some of the validations rendered errors at first. How these errors were fixed is described in this document: [Validation Process](validation-process.md).
-- CSS: No errors were returned when passing through the official [Jigsaw Validator]().
+- __CSS:__ No errors were returned when passing through the official [Jigsaw Validator]().
   One warning was returned: -webkit-backface-visibility is a vendor extension.
   But for compatibility reasons, the warning is ignored. 
-- HTML: No errors were returned when passing through the official [W3C Validator]().  
+- __HTML:__ No errors were returned when passing through the official [W3C Validator]().  
   One warning was returned: Section lacks heading. But since the content of the section element is loaded by JavaScript, the warning is ignored.
-- JavaScript: No errors were returned when passing through the official [JSHint Validator]().  
-  A few warnings were returned at first which were easily fixed, like a missing semicolon etc. One warning was: Function declarations should not be placed in blocks. This warning was solved by moving a couple of functions outside of their blocks. One final warning: Functions declared within loops referencing an outer scoped variable may lead to confusing semantics. This issue was not solved, despite efforts. But I was adviced from more experienced coders that this technically is a false positive and can be ignored.
-
-- Lighthouse: The results of the lighthouse evaluation in the Chrome development tool can be found in [Validation Process](validation-process.md).
-- Responsivity: The Chrome development tool has been used to check the responsivity of the web-site. The site works well on all the available predefined screen sizes and on larger screens.
-- Compatibility: The site has been checked for compatibility on Chrome, Edge, Firefox and Safari. The game's compatibility has also been tested on a set of different real life devices and was found to work fine.
+- __JavaScript:__ No errors were returned when passing through the official [JSHint Validator]().  
+  A few warnings were returned at first which were easily fixed, like a couple of missing semicolon etc.  
+  One more severe warning was: Function declarations should not be placed in blocks. This warning was solved by moving a couple of functions outside of their blocks.  
+  One final warning: Functions declared within loops referencing an outer scoped variable may lead to confusing semantics. This issue was not solved, despite efforts. But I was adviced from more experienced coders that this technically is a false positive and can be ignored.     
+- __Lighthouse:__ The results of the lighthouse evaluation in the Chrome development tool looked like this.
+- __Responsivity:__ The Chrome development tool has been used to check the responsivity of the web-site. The site works well on all the available predefined screen sizes as well as on larger screens.
+- __Compatibility:__ The site has been checked for compatibility on Chrome, Edge, Firefox and Safari. The game's compatibility has also been tested on a set of different real life devices and was found to work fine.
 
 ### Testing User Stories from User Experience (UX) Section
 
@@ -113,10 +111,13 @@ Some of the validations rendered errors at first. How these errors were fixed is
   - The game offers four different levels of difficulty for a player to choose from.
 
 ### Further Testing
-
-
+The game was tested throughout the development process and a number of bugs were found and resolved. A couple of examples:
+- Different phenomenon occurd before I managed to get the eventlisteners right and the cards to turn and turn back as they were supposed to.
+- The game broke if the player pushed the quit game button before the cards had turned back.
+This was solved with an if statement checking that the card divs id has a valid value.
 
 ### Known Bugs
+No know bugs remain.
 
 ## Deployment
 ### GitHub Pages
@@ -137,10 +138,14 @@ Apart from finding inspiration in the course material from Code Institute I foun
 
 ### Media
 Both the pattern on the backside of the cards and the images on the cards were collected from [vecteezy.com](https://www.vecteezy.com).
-- Pattern on the back side of the cards: [Pattern Vectors by Vecteezy](https://www.vecteezy.com/vector-art/139382-cute-buho-seamless-patterns")
+- Pattern on the backside of the cards: [Pattern Vectors by Vecteezy](https://www.vecteezy.com/vector-art/139382-cute-buho-seamless-patterns")
 - Card images: [Human Vectors by Vecteezy](https://www.vecteezy.com/vector-art/1337877-set-of-children-toys)
 
-
 ## Acknowledgements
+First I want to thank my Mentor, Narender Singh, who supported me with lots of valuable advice and support during the development process. I have learnt a lot from him that I will benefit from in my future coding career.  
+My fellow slackers deserve, as usual, a big thank you for support and encouragement. No one mentioned, no one forgotten. 
+But the team from Code Institute's 2021 Retro Gaming Hackathon ["Team Noiseland"](https://github.com/andrewdempsey2018/The-Never-Ending-Coding-Adventure-Codehog-Day) needs mentioning since they have done a super job evaluating the game and trying to find bugs.
 
 ## Conclusion
+Coding a responsive game for the first time in my life has been challenging but utterly amazing!  
+I don't understand why it took me this long to go down this path and learn coding for real. 
