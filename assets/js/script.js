@@ -212,66 +212,45 @@ let columns = 0; // Resulting number of columns
 let rows = 0; // Resulting number of rows
 let cardWidth = 0; // Width of an individual card
 
-function calcBoardSize() {
-  getScreenSize();
-
-  // The height of the screen needs to be reduces by the height of the headers
-  // and the quit game button to get the available screen height
+function calcAvailScreenHeight() {
   let headerOneHeight = document.getElementsByTagName('h1')[0].offsetHeight;
   let headerTwoHeight = document.getElementsByTagName('h3')[0].offsetHeight;
   let headerThreeHeight = document.getElementsByTagName('h3')[1].offsetHeight;
   let buttonHeight = document.getElementsByTagName('button')[0].offsetHeight;
   let availableScreenHeight = screenHeight - (headerOneHeight + headerTwoHeight + headerThreeHeight + buttonHeight);
+  return availableScreenHeight;
+}
 
-  // To decide the size of the game board and if the board should be turned sideways,
-  // compare the size of the individual cards for each case.
-  let compareWidth = screenWidth * 0.9 / boardSize[1];
-  let compareHeight = availableScreenHeight * 0.9 / boardSize[4];
-  let compareWidthTurned = screenWidth * 0.9 / boardSize[4];
-  let compareHeightTurned = availableScreenHeight * 0.9 / boardSize[1];
-  let normalGameArea = 0;
-  let normalHeight = 0;
-  let normalWidth = 0;
-  let turnedGameArea = 0;
-  let turnedHeight = 0;
-  let turnedWidth = 0;
+// Is the boardsize limited by screen height or screen width?
+function calcCompareCardWidth(boardSizeIndexX, boardSizeIndexY) {
+  let availableScreenHeight = calcAvailScreenHeight();
+  let compareCardWidth = screenWidth * 0.9 / boardSize[boardSizeIndexX];
+  let compareCardHeight = availableScreenHeight * 0.9 / boardSize[boardSizeIndexY];
+  compareCardWidth = Math.min(compareCardWidth, compareCardHeight);
+  return compareCardWidth;
+}
 
-  // If the board is unturned, is it the height or the width that limits
-  // the size of the board?
-  if (compareHeight < compareWidth) {
-    normalGameArea = compareHeight * boardSize[4] * compareHeight * boardSize[1];
-    normalHeight = compareHeight * boardSize[4];
-    normalWidth = compareHeight * boardSize[1];
-  } else {
-    normalGameArea = compareWidth * boardSize[4] * compareWidth * boardSize[1];
-    normalHeight = compareWidth * boardSize[4];
-    normalWidth = compareWidth * boardSize[1];
-  }
-
-  // If the board is turned, is it the height or the width that limits
-  // the size of the board?
-  if (compareHeightTurned < compareWidthTurned) {
-    turnedGameArea = compareHeightTurned * boardSize[1] * compareHeightTurned * boardSize[4];
-    turnedHeight = compareHeightTurned * boardSize[1];
-    turnedWidth = compareHeightTurned * boardSize[4];
-  } else {
-    turnedGameArea = compareWidthTurned * boardSize[1] * compareWidthTurned * boardSize[4];
-    turnedHeight = compareWidthTurned * boardSize[1];
-    turnedWidth = compareWidthTurned * boardSize[4];
-  }
-
-  // Turned or unturned - which gives the largest board?
-  if (normalGameArea > turnedGameArea) {
+// Does a portrait or landscape orientation give the largest screen?
+function portraitOrLandscape() {
+  let tempCardWidth = 0;
+  let compareWidthUnturned = calcCompareCardWidth(1, 4);
+  let compareWidthTurned = calcCompareCardWidth(4, 1);
+  if (compareWidthUnturned > compareWidthTurned) {
     columns = boardSize[1];
     rows = boardSize[4];
-    gameBoardWidth = normalWidth;
-    gameBoardHeight = normalHeight;
+    tempCardWidth = compareWidthUnturned;
   } else {
     columns = boardSize[4];
     rows = boardSize[1];
-    gameBoardWidth = turnedWidth;
-    gameBoardHeight = turnedHeight;
+    tempCardWidth = compareWidthTurned;
   }
+  gameBoardWidth = tempCardWidth * columns;
+  gameBoardHeight = tempCardWidth * rows;
+}
+
+function calcBoardSize() {
+  getScreenSize();
+  portraitOrLandscape();
   
   // The card width calculated from the board width minus an approximation of the gaps between the cards
   cardWidth = (gameBoardWidth - (columns - 1) * 4.6) / columns;
