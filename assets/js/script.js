@@ -256,11 +256,26 @@ function calcBoardSize() {
   cardWidth = (gameBoardWidth - (columns - 1) * 4.6) / columns;
 }
 
-function loadPlayGamePage() {
-  activePage = 'play-game-page';
+function definePlayGamePageSectionElement() {
+  section.innerHTML = `
+    <h3>Pick two cards to find two identical</h3>
+    <div class="game-board">
+    </div>
+    <h3 id="number-of-moves">Number of moves: ${numberOfMoves}</h3>
+    <button class="btn-quit-game large-btn">QUIT GAME</button>
+  `;
+}
 
-  // Available images array
-  let allImages = [
+function setGameBoardElementSize() {
+  calcBoardSize();
+  let boardDiv = section.getElementsByTagName('div')[0];
+
+  boardDiv.style.width = gameBoardWidth + 'px';
+  boardDiv.style.height = gameBoardHeight + 'px';
+}
+
+function declareAllImagesArray() {
+  return [
     'building blocks',
     'abacus',
     'dinosaur',
@@ -286,35 +301,12 @@ function loadPlayGamePage() {
     'slide',
     'bathing ball',
   ];
+}
 
-  // Create the section element for the play game page and define the first part
-  let section = document.getElementsByTagName('section')[0];
-  section.innerHTML = `
-    <h3>Pick two cards to find two identical</h3>
-    <div class="game-board">
-    </div>
-    <h3 id="number-of-moves">Number of moves: ${numberOfMoves}</h3>
-    <button class="btn-quit-game large-btn">QUIT GAME</button>
-  `;
+function createRandomizedArray() {
+  let allImages = declareAllImagesArray();
 
-  setSectionClassName();
-  section.style.height = '100%';
-
-  // Add eventlistener to quit game button 
-  let quitGameButton = section.getElementsByTagName('button')[0];
-
-  quitGameButton.addEventListener('click', quitGame);
-
-  // Set the width and height of the game board div element
-  calcBoardSize();
-  let boardDiv = section.getElementsByTagName('div')[0];
-
-  boardDiv.style.width = gameBoardWidth + 'px';
-  boardDiv.style.height = gameBoardHeight + 'px';
-
-  // Create an array from 1 to number of available images
-  // to get all the images to choose from
-  numberOfCards = columns * rows;
+  // Create an array from 1 to number of all available images
   let availableImages = [];
 
   for (let i = 1; i <= allImages.length; i++) {
@@ -324,6 +316,7 @@ function loadPlayGamePage() {
   // Create a new array with a random set of available image numbers and with  
   // a size depending on the users choice of game board size
   let images = [];
+  numberOfCards = columns * rows;
 
   for (let i = 0; i < numberOfCards / 2; i++) {
     let randomIndex = Math.floor(Math.random() * availableImages.length);
@@ -344,8 +337,12 @@ function loadPlayGamePage() {
     images[i] = images[j];
     images[j] = temp;
   }
+  return images;
+}
 
-  // Add HTML code for each card 
+function addCardHtmlElements() {
+  let images = createRandomizedArray()
+  let allImages = declareAllImagesArray()
   let cardsHtml = '';
 
   for (let i = 0; i < numberOfCards; i++) {
@@ -361,8 +358,21 @@ function loadPlayGamePage() {
     cardsHtml += cardHtml;
   }
 
-  // Add the card elements to the game board div
   section.children[1].innerHTML = cardsHtml;
+}
+
+function loadPlayGamePage() {
+  activePage = 'play-game-page';
+  definePlayGamePageSectionElement();
+  setSectionClassName();
+  section.style.height = '100%';
+  setGameBoardElementSize();
+  addCardHtmlElements();
+
+  // Add eventlistener to quit game button 
+  let quitGameButton = section.getElementsByTagName('button')[0];
+
+  quitGameButton.addEventListener('click', quitGame);
 
   // Now the game is ready for the user to select the first card 
   selectFirstCard();
