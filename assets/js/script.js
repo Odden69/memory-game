@@ -29,6 +29,25 @@ document.addEventListener("DOMContentLoaded", function () {
 window.addEventListener("resize", reloadActivePage);
 
 function reloadActivePage() {
+  switch (activePage) {
+    case 'play-game-page':
+      reloadPlayGamePage();
+      break;
+    case 'start-page':
+      loadStartPage();
+      break;
+    case 'how-to-play-page':
+      loadHowToPlayPage();
+      break;
+    case 'choose-board-size-page':
+      loadChooseBoardSizePage();
+      break;
+    default:
+      break;
+  }
+}
+
+function reloadActivePage() {
   if (activePage === 'play-game-page') {
     reloadPlayGamePage();
   }
