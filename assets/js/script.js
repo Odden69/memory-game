@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Let a resize of the screen trigger a reload of the active game page
-// Only enabled for pages where the js file is needed to update the page.
 window.addEventListener("resize", reloadActivePage);
 
 function reloadActivePage() {
@@ -38,6 +37,9 @@ function reloadActivePage() {
   }
   if (activePage === 'how-to-play-page') {
     loadHowToPlayPage();
+  }
+  if (activePage === 'choose-board-size-page') {
+    loadChooseBoardSizePage();
   }
 }
 
