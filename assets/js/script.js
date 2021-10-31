@@ -512,8 +512,7 @@ function reloadPlayGamePage() {
   }
 }
 
-function gameFinished() {
-  // Create the HTML code to post a game finished note
+function defineGameFinishedHtmlElements() {
   let html = `
     <div class="game-finished-background"></div>
     <div class="game-finished">
@@ -524,11 +523,12 @@ function gameFinished() {
       <button class="btn-gf-back-to-start small-btn">Back to start</button>
     </div>
   `;
-  // Remove the eventlistener from the original quit game button
-  let section = document.getElementsByTagName('section')[0];
+  return html;
+}
+
+function gameFinished() {
+  let html = defineGameFinishedHtmlElements();
   section.innerHTML += html;
-  let quitGameButton = section.getElementsByTagName('button')[0];
-  quitGameButton.removeEventListener('click', quitGame);
 
   // Add eventlisteners to the buttons on the game finished note
   let playAgainButton = section.getElementsByTagName('button')[1];
