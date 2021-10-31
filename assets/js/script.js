@@ -130,7 +130,7 @@ function setHowToPlayPageSectionHeight() {
 
 function loadHowToPlayPage() {
   activePage = 'how-to-play-page';
-  defineHowToPlayPageSectionElement()
+  defineHowToPlayPageSectionElement();
   setSectionClassName();
   setHowToPlayPageSectionHeight();
 
@@ -341,8 +341,8 @@ function createRandomizedArray() {
 }
 
 function addCardHtmlElements() {
-  let images = createRandomizedArray()
-  let allImages = declareAllImagesArray()
+  let images = createRandomizedArray();
+  let allImages = declareAllImagesArray();
   let cardsHtml = '';
 
   for (let i = 0; i < numberOfCards; i++) {
@@ -401,7 +401,7 @@ function selectFirstCard() {
 }
 
 /* Find the id and the img of the first picked card, turn it and remove the 
-   eventlistener from the that card
+   eventlistener from that card
    The code for flipping an image was found on 
    https://www.w3schools.com/howto/howto_css_flip_image.asp */
 function firstSelected() {
@@ -440,33 +440,30 @@ function secondSelected() {
   compareCards();
 }
 
+function hideCards() {
+  if (document.getElementById(idFirstCard) !== null) {
+    document.getElementById(idFirstCard).style.visibility = "hidden";
+    document.getElementById(idSecondCard).style.visibility = "hidden";
+    selectFirstCard();
+  }
+}
+
+function turnCards() {
+  if (document.getElementById(idFirstCard) !== null) {
+    let firstCard = document.getElementById(idFirstCard);
+    let secondCard = document.getElementById(idSecondCard);
+    firstCard.getElementsByClassName('inner-card-cont')[0].style.transform = 'none';
+    secondCard.getElementsByClassName('inner-card-cont')[0].style.transform = 'none';
+    selectFirstCard();
+  }
+}
+
+// Compare the image of the two selected cards. If they are identical hide them,
+// if they are not, turn them back. 
 function compareCards() {
   for (let i = 0; i < numberOfCards; i++) {
     let card = document.getElementById('card' + i);
     card.removeEventListener('click', secondSelected);
-  }
-  // Update number of moves variable and show it to the player
-  numberOfMoves++;
-  document.getElementById('number-of-moves').innerHTML = `Number of moves: ${numberOfMoves}`;
-
-  // Compare the image of the two choosen cards
-  // If they are identical hide them, if not turn them back
-  function hideCards() {
-    if (document.getElementById(idFirstCard) !== null) {
-      document.getElementById(idFirstCard).style.visibility = "hidden";
-      document.getElementById(idSecondCard).style.visibility = "hidden";
-      selectFirstCard();
-    }
-  }
-
-  function turnCards() {
-    if (document.getElementById(idFirstCard) !== null) {
-      let firstCard = document.getElementById(idFirstCard);
-      let secondCard = document.getElementById(idSecondCard);
-      firstCard.getElementsByClassName('inner-card-cont')[0].style.transform = 'none';
-      secondCard.getElementsByClassName('inner-card-cont')[0].style.transform = 'none';
-      selectFirstCard();
-    }
   }
 
   //The setTimeout method was found on https://www.w3schools.com/jsref/met_win_settimeout.asp
@@ -476,6 +473,9 @@ function compareCards() {
   } else {
     setTimeout(turnCards, 2000);
   }
+
+  numberOfMoves++;
+  document.getElementById('number-of-moves').innerHTML = `Number of moves: ${numberOfMoves}`;
 }
 
 // Recalculate the boardsize and cardwidth to adopt to a resized screen
