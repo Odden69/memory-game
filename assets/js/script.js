@@ -6,7 +6,7 @@ let activePage = ''; // Is set to indicate which game page is currently active
 const darkColor = '#193C32';
 const lightColor = '#F0F2DC';
 let screenWidth = 0; // Window width used by the game area
-let screenHeight = 0; // Window height used by the game area 
+let screenHeight = 0; // Window height used by the game area
 const section = document.getElementsByTagName('section')[0];
 
 // Max screen width used for the game area is 600px
@@ -43,6 +43,10 @@ function reloadActivePage() {
   }
 }
 
+function setSectionId() {
+  section.id = activePage;
+}
+
 function defineStartPageSectionElement() {
   section.innerHTML = `
     <div id="spacer"></div>
@@ -72,7 +76,7 @@ function setStartPageImageSize(section) {
 function loadStartPage() {
   activePage = 'start-page';
   defineStartPageSectionElement();
-  section.id = 'start-page';
+  setSectionId();
   section.style.height = '100%';
   setStartPageImageSize(section);
 
@@ -123,7 +127,7 @@ function setHowToPlayPageSectionHeight() {
 function loadHowToPlayPage() {
   activePage = 'how-to-play-page';
   defineHowToPlayPageSectionElement()
-  section.id = 'how-to-play-page';
+  setSectionId();
   setHowToPlayPageSectionHeight();
 
   // Add event listener to buttons on the how to play page
@@ -134,11 +138,7 @@ function loadHowToPlayPage() {
   chooseBoardSizeLink.addEventListener('click', loadChooseBoardSizePage);
 }
 
-function loadChooseBoardSizePage() {
-  activePage = 'choose-board-size-page';
-
-  // Create the section element for the choose board size page 
-  let section = document.getElementsByTagName('section')[0];
+function defineChooseBoardSizePageSectionElement() {
   section.innerHTML = `
     <h2>Choose board size</h2>
     <button data-size='[3, 4]' class="small-btn">3 x 4</button>
@@ -148,11 +148,10 @@ function loadChooseBoardSizePage() {
     <button class="btn-play-game large-btn">PLAY GAME</button>
     <button class="btn-back-to-start small-btn">Back to start</button>
   `;
+}
 
-  section.id = 'choose-board-size-page';
-
-  // Set height of section element
-  // If statement solves responsiveness when the screen height gets too small
+// Solves responsiveness of choose board size page
+function setChooseBoardSizePageSectionHeight() {
   getScreenSize();
 
   if (screenHeight < 525) {
@@ -160,42 +159,49 @@ function loadChooseBoardSizePage() {
   } else {
     section.style.height = '100%';
   }
+}
 
-  // Add background color to the button with the active board size 
+function styleActiveButton() {
   let buttons = section.getElementsByTagName('button');
-
   for (let button of buttons) {
     if (button.getAttribute('data-size') === boardSize) {
       button.style.backgroundColor = darkColor;
       button.style.color = lightColor;
+    } else {
+      button.style.backgroundColor = lightColor;
+      button.style.color = darkColor;
     }
   }
+}
 
-  // Add event listener to buttons on the choose board size page
-  // and set color of the selected board size button
-  function clearButtons() {
-    for (let i = 0; i < buttons.length; i++) {
-      buttons[i].style.backgroundColor = lightColor;
-      buttons[i].style.color = darkColor;
-    }
-  }
+function setBoardSize(button) {
+  boardSize = button.getAttribute('data-size');
+}
 
-  function setBoardSize(button) {
-    boardSize = button.getAttribute('data-size');
-  }
+function loadChooseBoardSizePage() {
+  activePage = 'choose-board-size-page';
+  defineChooseBoardSizePageSectionElement();
+  setSectionId();
+  setChooseBoardSizePageSectionHeight();
+  styleActiveButton();
+
+  let buttons = section.getElementsByTagName('button');
 
   for (let button of buttons) {
     button.addEventListener('click', function () {
-      if (this.className.split(' ')[0] === 'btn-play-game') {
-        loadPlayGamePage();
-      } else if (this.className.split(' ')[0] === 'btn-back-to-start') {
-        quitGame();
-      } else {
-        clearButtons();
-        this.style.backgroundColor = darkColor;
-        this.style.color = lightColor;
-        setBoardSize(this);
+      let buttonName = this.className.split(' ')[0];
+      switch (buttonName) {
+        case 'btn-play-game':
+          loadPlayGamePage();
+          break;
+        case 'btn-back-to-start':
+          quitGame();
+          break;
+        default:
+          setBoardSize(this);
+          break;    
       }
+      styleActiveButton();  
     });
   }
 }
