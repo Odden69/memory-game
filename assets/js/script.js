@@ -84,11 +84,7 @@ function loadStartPage() {
   playGameButton.addEventListener('click', loadPlayGamePage);
 }
 
-function loadHowToPlayPage() {
-  activePage = 'how-to-play-page';
-
-  // Create the section element for the how to play page 
-  let section = document.getElementsByTagName('section')[0];
+function defineHowToPlayPageSectionElement() {
   section.innerHTML = `
     <button class="btn-back-to-start small-btn">Back to start</button>
     <div id="how-to-play"><h2>How to play</h2>
@@ -106,12 +102,10 @@ function loadHowToPlayPage() {
       Smaller board makes the game easier. Bigger board makes it harder.
     </div>
   `;
+}
 
-  section.id = 'how-to-play-page';
-
-  // Set height of section element
-  // If statement solves responsiveness when the how to play element's height gets
-  // too big for the screen
+// Solves responsiveness of how to play page
+function setHowToPlayPageSectionHeight() {
   getScreenSize();
   let howToPlayHeight = section.children[1].offsetHeight;
   let howToPlayTop = section.children[1].offsetTop;
@@ -122,6 +116,13 @@ function loadHowToPlayPage() {
   } else {
     section.style.height = '100%';
   }
+}
+
+function loadHowToPlayPage() {
+  activePage = 'how-to-play-page';
+  defineHowToPlayPageSectionElement()
+  section.id = 'how-to-play-page';
+  setHowToPlayPageSectionHeight();
 
   // Add event listener to buttons on the how to play page
   let startPageButton = section.children[0];
