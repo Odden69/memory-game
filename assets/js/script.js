@@ -7,6 +7,7 @@ const darkColor = '#193C32';
 const lightColor = '#F0F2DC';
 let screenWidth = 0; // Window width used by the game area
 let screenHeight = 0; // Window height used by the game area 
+const section = document.getElementsByTagName('section')[0];
 
 // Max screen width used for the game area is 600px
 function getScreenSize() {
@@ -40,11 +41,7 @@ function reloadActivePage() {
   }
 }
 
-function loadStartPage() {
-  activePage = 'start-page';
-
-  // Create the section element for the start page 
-  let section = document.getElementsByTagName('section')[0];
+function defineStartPageSectionElement() {
   section.innerHTML = `
     <div id="spacer"></div>
     <div id="start-page-button-cont">
@@ -54,11 +51,10 @@ function loadStartPage() {
     </div>
     <img id="start-page-image" src="assets/images/start-page-image.png" alt="Picture of the game board">
   `;
+}
 
-  section.id = 'start-page';
-  section.style.height = '100%';
-
-  // If statement solves responsiveness of start-page-image for tall narrow screens
+// Solves responsiveness of start page image
+function setStartPageImageSize(section) {
   getScreenSize();
   let screenRatio = screenHeight / screenWidth;
 
@@ -69,6 +65,14 @@ function loadStartPage() {
     section.children[2].style.height = '40%';
     section.children[2].style.width = 'auto';
   }
+}
+
+function loadStartPage() {
+  activePage = 'start-page';
+  defineStartPageSectionElement();
+  section.id = 'start-page';
+  section.style.height = '100%';
+  setStartPageImageSize(section);
 
   // Add event listener to buttons on the start page
   let howToPlayButton = section.children[1].children[0];
