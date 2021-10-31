@@ -47,21 +47,6 @@ function reloadActivePage() {
   }
 }
 
-function reloadActivePage() {
-  if (activePage === 'play-game-page') {
-    reloadPlayGamePage();
-  }
-  if (activePage === 'start-page') {
-    loadStartPage();
-  }
-  if (activePage === 'how-to-play-page') {
-    loadHowToPlayPage();
-  }
-  if (activePage === 'choose-board-size-page') {
-    loadChooseBoardSizePage();
-  }
-}
-
 function setSectionClassName() {
   section.className = activePage;
 }
