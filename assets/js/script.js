@@ -64,7 +64,7 @@ function defineStartPageSectionElement() {
 }
 
 // Solves responsiveness of start page image
-function setStartPageImageSize(section) {
+function setStartPageImageSize() {
   getScreenSize();
   let screenRatio = screenHeight / screenWidth;
 
@@ -82,7 +82,7 @@ function loadStartPage() {
   defineStartPageSectionElement();
   setSectionClassName();
   section.style.height = '100%';
-  setStartPageImageSize(section);
+  setStartPageImageSize();
 
   // Add event listener to buttons on the start page
   let howToPlayButton = section.children[1].children[0];
@@ -156,11 +156,7 @@ function defineChooseBoardSizePageSectionElement() {
 function setChooseBoardSizePageSectionHeight() {
   getScreenSize();
 
-  if (screenHeight < 525) {
-    section.style.height = 525 + 'px';
-  } else {
-    section.style.height = '100%';
-  }
+  section.style.height = (screenHeight < 525) ? 525 + 'px' : '100%';
 }
 
 function styleActiveButton() {
