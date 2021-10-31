@@ -43,19 +43,19 @@ function reloadActivePage() {
   }
 }
 
-function setSectionId() {
-  section.id = activePage;
+function setSectionClassName() {
+  section.className = activePage;
 }
 
 function defineStartPageSectionElement() {
   section.innerHTML = `
-    <div id="spacer"></div>
-    <div id="start-page-button-cont">
+    <div class="spacer"></div>
+    <div class="start-page-button-cont">
       <button class="btn-how-to-play small-btn">How to play</button>
       <button class="btn-choose-board-size small-btn">Choose board size</button>
       <button class="btn-play-game large-btn">PLAY GAME</button>
     </div>
-    <img id="start-page-image" src="assets/images/start-page-image.png" alt="Picture of the game board">
+    <img class="start-page-image" src="assets/images/start-page-image.png" alt="Picture of the game board">
   `;
 }
 
@@ -76,7 +76,7 @@ function setStartPageImageSize(section) {
 function loadStartPage() {
   activePage = 'start-page';
   defineStartPageSectionElement();
-  setSectionId();
+  setSectionClassName();
   section.style.height = '100%';
   setStartPageImageSize(section);
 
@@ -93,7 +93,7 @@ function loadStartPage() {
 function defineHowToPlayPageSectionElement() {
   section.innerHTML = `
     <button class="btn-back-to-start small-btn">Back to start</button>
-    <div id="how-to-play"><h2>How to play</h2>
+    <div class="how-to-play"><h2>How to play</h2>
       Pick two cards.<br>
       The cards will be turned over and you can see the image on the back of the cards.<br>
       If the images are identical the cards will be removed
@@ -127,7 +127,7 @@ function setHowToPlayPageSectionHeight() {
 function loadHowToPlayPage() {
   activePage = 'how-to-play-page';
   defineHowToPlayPageSectionElement()
-  setSectionId();
+  setSectionClassName();
   setHowToPlayPageSectionHeight();
 
   // Add event listener to buttons on the how to play page
@@ -181,7 +181,7 @@ function setBoardSize(button) {
 function loadChooseBoardSizePage() {
   activePage = 'choose-board-size-page';
   defineChooseBoardSizePageSectionElement();
-  setSectionId();
+  setSectionClassName();
   setChooseBoardSizePageSectionHeight();
   styleActiveButton();
 
@@ -314,13 +314,13 @@ function loadPlayGamePage() {
   let section = document.getElementsByTagName('section')[0];
   section.innerHTML = `
     <h3>Pick two cards to find two identical</h3>
-    <div id="game-board">
+    <div class="game-board">
     </div>
     <h3 id="number-of-moves">Number of moves: ${numberOfMoves}</h3>
     <button class="btn-quit-game large-btn">QUIT GAME</button>
   `;
 
-  section.id = 'play-game-page';
+  setSectionClassName();
   section.style.height = '100%';
 
   // Add eventlistener to quit game button 
@@ -384,7 +384,7 @@ function loadPlayGamePage() {
     cardsHtml += cardHtml;
   }
 
-  // Add the card elements to the game-board div
+  // Add the card elements to the game board div
   section.children[1].innerHTML = cardsHtml;
 
   // Now the game is ready for the user to select the first card 
@@ -496,7 +496,7 @@ function reloadPlayGamePage() {
   calcBoardSize();
 
   // Set the width and height of the game board div element
-  let boardDiv = document.getElementById('game-board');
+  let boardDiv = document.getElementsByClassName('game-board')[0];
 
   boardDiv.style.width = gameBoardWidth + 'px';
   boardDiv.style.height = gameBoardHeight + 'px';
@@ -508,19 +508,18 @@ function reloadPlayGamePage() {
     card.style.width = cardWidth + 'px';
     card.style.height = cardWidth + 'px';
   }
-
 }
 
 function gameFinished() {
   // Create the HTML code to post a game finished note
   let html = `
-    <div id="game-finished-background"></div>
-    <div id="game-finished">
+    <div class="game-finished-background"></div>
+    <div class="game-finished">
       <h2>Good job!</h2>
       <h3>You finished the game in ${numberOfMoves} moves!</h3>
-      <button id="btn-gf-play-again" class="small-btn">Play again</button>
-      <button id="btn-gf-choose-board-size" class="small-btn">Choose board size</button>
-      <button id="btn-gf-back-to-start" class="small-btn">Back to start</button>
+      <button class="btn-gf-play-again small-btn">Play again</button>
+      <button class="btn-gf-choose-board-size small-btn">Choose board size</button>
+      <button class="btn-gf-back-to-start small-btn">Back to start</button>
     </div>
   `;
   // Remove the eventlistener from the original quit game button
