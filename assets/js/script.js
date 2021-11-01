@@ -98,8 +98,8 @@ function defineHowToPlayPageSectionElement() {
   section.innerHTML = `
     <button class="btn-back-to-start small-btn">Back to start</button>
     <div class="how-to-play"><h2>How to play</h2>
-      Pick two cards.<br>
-      The cards will be turned over and you can see the image on the back of the cards.<br>
+      Pick two cards from the board.<br>
+      The cards will be turned over and you can see the image on the front of the cards.<br>
       If the images are identical the cards will be removed
       and you just pick another pair of cards.<br>
       If the two cards are not identical, the cards will flip back.<br>
@@ -142,11 +142,11 @@ function loadHowToPlayPage() {
 
 function defineChooseBoardSizePageSectionElement() {
   section.innerHTML = `
-    <h2>Choose board size</h2>
-    <button data-size='[3, 4]' class="small-btn">3 x 4</button>
-    <button data-size='[4, 5]' class="small-btn">4 x 5</button>
-    <button data-size='[5, 6]' class="small-btn">5 x 6</button>
-    <button data-size='[6, 8]' class="small-btn">6 x 8</button>
+    <h2 id="choose-board-size-header">Choose board size</h2>
+    <button data-size='[3, 4]' class="small-btn" aria-labelledby='choose-board-size-header'>3 x 4</button>
+    <button data-size='[4, 5]' class="small-btn" aria-labelledby='choose-board-size-header'>4 x 5</button>
+    <button data-size='[5, 6]' class="small-btn" aria-labelledby='choose-board-size-header'>5 x 6</button>
+    <button data-size='[6, 8]' class="small-btn" aria-labelledby='choose-board-size-header'>6 x 8</button>
     <button class="btn-play-game large-btn">PLAY GAME</button>
     <button class="btn-back-to-start small-btn">Back to start</button>
   `;
