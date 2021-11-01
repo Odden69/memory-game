@@ -221,7 +221,7 @@ function calcAvailScreenHeight() {
   return availableScreenHeight;
 }
 
-// Is the boardsize limited by screen height or screen width?
+// Is the board size limited by screen height or screen width?
 function calcCompareCardWidth(boardSizeIndexX, boardSizeIndexY) {
   let availableScreenHeight = calcAvailScreenHeight();
   let compareCardWidth = screenWidth * 0.9 / boardSize[boardSizeIndexX];
@@ -329,7 +329,7 @@ function createRandomizedArray() {
   images = images.concat(images);
 
   // Randomize the array of image numbers using Durstenfeld shuffle algorithm 
-  // to get a chuffled deck of cards
+  // to get a shuffled deck of cards
   // Found on https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array 
   for (let i = (numberOfCards - 1); i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
@@ -369,7 +369,7 @@ function loadPlayGamePage() {
   setGameBoardElementSize();
   addCardHtmlElements();
 
-  // Add eventlistener to quit game button 
+  // Add event listener to quit game button 
   let quitGameButton = section.getElementsByTagName('button')[0];
 
   quitGameButton.addEventListener('click', quitGame);
@@ -385,7 +385,7 @@ let imageSecondCard = '';
 let imageFirstCard = '';
 
 function selectFirstCard() {
-  // Add eventlisteners to the cards. Skip the ones that has already been taken
+  // Add event listeners to the cards. Skip the ones that has already been taken
   if (cardsMatched.length === numberOfCards) {
     gameFinished();
   } else {
@@ -401,7 +401,7 @@ function selectFirstCard() {
 }
 
 /* Find the id and the img of the first picked card, turn it and remove the 
-   eventlistener from that card
+   event listener from that card
    The code for flipping an image was found on 
    https://www.w3schools.com/howto/howto_css_flip_image.asp */
 function firstSelected() {
@@ -413,9 +413,9 @@ function firstSelected() {
   selectSecondCard();
 }
 
-// Delete the firstSelected eventlisteners from all cards and add a new
-// eventlistener to all cards except the ones that has already been matched
-// and the just previously choosen card
+// Delete the firstSelected event listeners from all cards and add a new
+// event listener to all cards except the ones that has already been matched
+// and the just previously chosen card
 function selectSecondCard() {
   for (let i = 0; i < numberOfCards; i++) {
     let card = document.getElementById('card' + i);
@@ -478,7 +478,7 @@ function compareCards() {
   document.getElementById('number-of-moves').innerHTML = `Number of moves: ${numberOfMoves}`;
 }
 
-// Recalculate the boardsize and cardwidth to adopt to a resized screen
+// Recalculate the board size and card width to adopt to a resized screen
 function reloadPlayGamePage() {
   calcBoardSize();
 
@@ -488,7 +488,7 @@ function reloadPlayGamePage() {
   boardDiv.style.width = gameBoardWidth + 'px';
   boardDiv.style.height = gameBoardHeight + 'px';
 
-  // Give each card its new cardwidth
+  // Give each card its new card width
   for (let i = 0; i < numberOfCards; i++) {
     let cardId = 'card' + i;
     let card = document.getElementById(cardId);
@@ -515,7 +515,7 @@ function gameFinished() {
   let html = defineGameFinishedHtmlElements();
   section.innerHTML += html;
 
-  // Add eventlisteners to the buttons on the game finished note
+  // Add event listeners to the buttons on the game finished note
   let playAgainButton = section.getElementsByTagName('button')[1];
   let chooseBoardSizeButton = section.getElementsByTagName('button')[2];
   let backToStartButton = section.getElementsByTagName('button')[3];
