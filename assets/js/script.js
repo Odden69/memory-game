@@ -197,9 +197,9 @@ function loadChooseBoardSizePage() {
           break;
         default:
           setBoardSize(this);
-          break;    
+          break;
       }
-      styleActiveButton();  
+      styleActiveButton();
     });
   }
 }
@@ -251,7 +251,7 @@ function portraitOrLandscape() {
 function calcBoardSize() {
   getScreenSize();
   portraitOrLandscape();
-  
+
   // The card width calculated from the board width minus an approximation of the gaps between the cards
   cardWidth = (gameBoardWidth - (columns - 1) * 4.6) / columns;
 }
