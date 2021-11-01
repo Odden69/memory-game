@@ -19,8 +19,8 @@ function getScreenSize() {
   screenHeight = window.innerHeight;
 }
 
-// Wait for the DOM to finish loading before adding
-// the section element for the first page to the html
+/* Wait for the DOM to finish loading before adding
+   the section element for the first page to the html */
 document.addEventListener("DOMContentLoaded", function () {
   loadStartPage();
 });
@@ -50,6 +50,8 @@ function reloadActivePage() {
 function setSectionClassName() {
   section.className = activePage;
 }
+
+//  - Start Page -
 
 function defineStartPageSectionElement() {
   section.innerHTML = `
@@ -93,6 +95,8 @@ function loadStartPage() {
   chooseBoardSizeButton.addEventListener('click', loadChooseBoardSizePage);
   playGameButton.addEventListener('click', loadPlayGamePage);
 }
+
+//  - How To Play Page -
 
 function defineHowToPlayPageSectionElement() {
   section.innerHTML = `
@@ -139,6 +143,8 @@ function loadHowToPlayPage() {
 
   startPageButton.addEventListener('click', loadStartPage);
 }
+
+//  - Choose Board Size Page -
 
 function defineChooseBoardSizePageSectionElement() {
   section.innerHTML = `
@@ -204,8 +210,10 @@ function loadChooseBoardSizePage() {
   }
 }
 
-// Calculate the size and format of the game board depending on the
-// screen size and the user's choice of board size.
+//  - Play Game Page -
+
+/* Calculate the size and format of the game board depending on the
+   screen size and the user's choice of board size. */
 let gameBoardWidth = 0; // Resulting board width in px
 let gameBoardHeight = 0; // Resulting board height in px
 let columns = 0; // Resulting number of columns
@@ -313,8 +321,8 @@ function createRandomizedArray() {
     availableImages.push(i);
   }
 
-  // Create a new array with a random set of available image numbers and with  
-  // a size depending on the users choice of game board size
+  /* Create a new array with a random set of available image numbers and with  
+     a size depending on the users choice of game board size */
   let images = [];
   numberOfCards = columns * rows;
 
@@ -328,9 +336,9 @@ function createRandomizedArray() {
   //Double the image array to get a pair of each image
   images = images.concat(images);
 
-  // Randomize the array of image numbers using Durstenfeld shuffle algorithm 
-  // to get a shuffled deck of cards
-  // Found on https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array 
+  /* Randomize the array of image numbers using Durstenfeld shuffle algorithm 
+     to get a shuffled deck of cards
+     Found on https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array */
   for (let i = (numberOfCards - 1); i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
     let temp = images[i];
@@ -413,9 +421,9 @@ function firstSelected() {
   selectSecondCard();
 }
 
-// Delete the firstSelected event listeners from all cards and add a new
-// event listener to all cards except the ones that has already been matched
-// and the just previously chosen card
+/* Delete the firstSelected event listeners from all cards and add a new
+   event listener to all cards except the ones that has already been matched
+   and the just previously chosen card */
 function selectSecondCard() {
   for (let i = 0; i < numberOfCards; i++) {
     let card = document.getElementById('card' + i);
@@ -458,15 +466,15 @@ function turnCards() {
   }
 }
 
-// Compare the image of the two selected cards. If they are identical hide them,
-// if they are not, turn them back. 
+/* Compare the image of the two selected cards. If they are identical hide them,
+   if they are not, turn them back. */
 function compareCards() {
   for (let i = 0; i < numberOfCards; i++) {
     let card = document.getElementById('card' + i);
     card.removeEventListener('click', secondSelected);
   }
 
-  //The setTimeout method was found on https://www.w3schools.com/jsref/met_win_settimeout.asp
+  // The setTimeout method was found on https://www.w3schools.com/jsref/met_win_settimeout.asp
   if (imageFirstCard === imageSecondCard) {
     setTimeout(hideCards, 950);
     cardsMatched.push(idFirstCard, idSecondCard);
