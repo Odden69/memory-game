@@ -5,18 +5,19 @@ let numberOfMoves = 0; // Number of pairs picked by the player
 let activePage = ''; // Is set to indicate which game page is currently active
 const darkColor = '#193C32';
 const lightColor = '#F0F2DC';
-let screenWidth = 0; // Window width used by the game area
-let screenHeight = 0; // Window height used by the game area
 const section = document.getElementsByTagName('section')[0];
 
 // Max screen width used for the game area is 600px
 function getScreenSize() {
+  let screenWidth = 0;
+  let screenHeight = 0;
   if (window.innerWidth > 600) {
     screenWidth = 600;
   } else {
     screenWidth = window.innerWidth;
   }
   screenHeight = window.innerHeight;
+  return [screenWidth, screenHeight];
 }
 
 /* Wait for the DOM to finish loading before adding
@@ -67,7 +68,8 @@ function defineStartPageSectionElement() {
 
 // Solves responsiveness of start page image
 function setStartPageImageSize() {
-  getScreenSize();
+  let screenWidth = getScreenSize()[0];
+  let screenHeight = getScreenSize()[1];
   let screenRatio = screenHeight / screenWidth;
 
   if (screenRatio > 1.6) {
@@ -120,7 +122,7 @@ function defineHowToPlayPageSectionElement() {
 
 // Solves responsiveness of how to play page
 function setHowToPlayPageSectionHeight() {
-  getScreenSize();
+  let screenHeight = getScreenSize()[1];
   let howToPlayHeight = section.children[1].offsetHeight;
   let howToPlayTop = section.children[1].offsetTop;
   let headerOneHeight = document.getElementsByTagName('h1')[0].offsetHeight;
@@ -160,7 +162,7 @@ function defineChooseBoardSizePageSectionElement() {
 
 // Solves responsiveness of choose board size page
 function setChooseBoardSizePageSectionHeight() {
-  getScreenSize();
+  let screenHeight = getScreenSize()[1];
 
   section.style.height = (screenHeight < 525) ? 525 + 'px' : '100%';
 }
@@ -257,7 +259,6 @@ function portraitOrLandscape() {
 }
 
 function calcBoardSize() {
-  getScreenSize();
   portraitOrLandscape();
 
   // The card width calculated from the board width minus an approximation of the gaps between the cards
