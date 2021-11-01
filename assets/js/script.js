@@ -241,7 +241,7 @@ function calcCompareCardWidth(boardSizeIndexX, boardSizeIndexY) {
 }
 
 // Does a portrait or landscape orientation give the largest screen?
-function portraitOrLandscape() {
+function calcBoardSize() {
   let tempCardWidth = 0;
   let compareWidthUnturned = calcCompareCardWidth(1, 4);
   let compareWidthTurned = calcCompareCardWidth(4, 1);
@@ -258,8 +258,8 @@ function portraitOrLandscape() {
   gameBoardHeight = tempCardWidth * rows;
 }
 
-function calcBoardSize() {
-  portraitOrLandscape();
+function calcCardWidth() {
+  calcBoardSize();
 
   // The card width calculated from the board width minus an approximation of the gaps between the cards
   cardWidth = (gameBoardWidth - (columns - 1) * 4.6) / columns;
@@ -276,7 +276,7 @@ function definePlayGamePageSectionElement() {
 }
 
 function setGameBoardElementSize() {
-  calcBoardSize();
+  calcCardWidth();
   let boardDiv = section.getElementsByTagName('div')[0];
 
   boardDiv.style.width = gameBoardWidth + 'px';
@@ -489,7 +489,7 @@ function compareCards() {
 
 // Recalculate the board size and card width to adopt to a resized screen
 function reloadPlayGamePage() {
-  calcBoardSize();
+  calcCardWidth();
 
   // Set the width and height of the game board div element
   let boardDiv = document.getElementsByClassName('game-board')[0];
