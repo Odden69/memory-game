@@ -223,6 +223,7 @@ let rows = 0; // Resulting number of rows
 let cardWidth = 0; // Width of an individual card
 
 function calcAvailScreenHeight() {
+  let screenHeight = getScreenSize()[1];
   let headerOneHeight = document.getElementsByTagName('h1')[0].offsetHeight;
   let headerTwoHeight = document.getElementsByTagName('h3')[0].offsetHeight;
   let headerThreeHeight = document.getElementsByTagName('h3')[1].offsetHeight;
@@ -233,6 +234,7 @@ function calcAvailScreenHeight() {
 
 // Is the board size limited by screen height or screen width?
 function calcCompareCardWidth(boardSizeIndexX, boardSizeIndexY) {
+  let screenWidth = getScreenSize()[0];
   let availableScreenHeight = calcAvailScreenHeight();
   let compareCardWidth = screenWidth * 0.9 / boardSize[boardSizeIndexX];
   let compareCardHeight = availableScreenHeight * 0.9 / boardSize[boardSizeIndexY];
