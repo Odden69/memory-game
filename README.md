@@ -118,7 +118,7 @@ The basic idea of applying the same pages to a larger screen:
 
 ### Further Testing
 The game was tested throughout the development process and a number of bugs were found and resolved. A couple of examples:
-- Different phenomenon occurred before I managed to get the event listeners right and the cards to turn and turn back as they were supposed to.
+- Several different phenomenon occurred before I managed to get the event listeners right and the cards to turn and turn back as they were supposed to.
 - The game broke if the player pushed the quit game button before the cards had turned back.
 This was solved with an if statement checking that the card divs id have a valid value.
 
