@@ -35,7 +35,7 @@ The basic idea of applying the same pages to a larger screen:
 
 ## Features
 ### Existing Features
-- The starting page consists of three buttons with links to other pages. The user can choose between: 
+- The starting page consists of three buttons with links to the other pages. The user can choose between: 
   - Reading about how the game is played.
   - Change the size of the game board to make the game harder or easier.
   - Play the game.  
@@ -74,7 +74,7 @@ The basic idea of applying the same pages to a larger screen:
 -   JavaScript
 
 ### Programs Used
-- The [Gitpod](http://gitpod.io) terminal was used for writing the code, commit it to Git and push it to GitHub.
+- The [Gitpod](http://gitpod.io) terminal was used for writing the code, committing it to Git and pushing it to GitHub.
 - [Git](https://git-scm.com/) was used for version control.
 - [GitHub](https://github.com/) is used to store the project's code and to deploy the project to GitHub pages.
 - [Balsamiq](https://balsamiq.com/) was used to create the wireframes during the design process.
@@ -86,16 +86,22 @@ The basic idea of applying the same pages to a larger screen:
 - The contrast of the colour scheme was checked on [Contrast Grid](https://contrast-grid.eightshapes.com/?version=1.1.0&background-colors=&foreground-colors=%23F7FCE2%2C%20Buttons%20and%20header%0D%0A%23193C32%2C%20Text%0D%0A%2387BFBB%2C%20Background%0D%0A&es-color-form__tile-size=compact&es-color-form__show-contrast=aaa&es-color-form__show-contrast=aa&es-color-form__show-contrast=aa18&es-color-form__show-contrast=dnp).
 
 ## Testing
-- __CSS:__ No errors were returned when passing through the official [Jigsaw Validator]().
+- __CSS:__ No errors were returned when passing through the official [Jigsaw Validator](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fodden69.github.io%2Fmemory-game%2Findex.html&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=sv).  
   One warning was returned: -webkit-backface-visibility is a vendor extension.
   But for compatibility reasons, the warning is ignored. 
-- __HTML:__ No errors were returned when passing through the official [W3C Validator]().  
+- __HTML:__ No errors were returned when passing through the official [W3C Validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Fodden69.github.io%2Fmemory-game%2Findex.html).  
   One warning was returned: Section lacks heading. But since the content of the section element is loaded by JavaScript, the warning is ignored.
-- __JavaScript:__ No errors were returned when passing through the official [JSHint Validator]().  
-  A few warnings were returned at first which were easily fixed, like a couple of missing semicolon etc.  
+- __JavaScript:__ No errors were returned when passing through the official JSHint Validator.  
+  A few warnings were returned at first which were easily fixed, like a couple of missing semicolons etc.  
   One more severe warning was: Function declarations should not be placed in blocks. This warning was solved by moving a couple of functions outside of their blocks.  
-  One final warning: Functions declared within loops referencing an outer scoped variable may lead to confusing semantics. This issue was not solved, despite efforts. But I was adviced from more experienced coders that this technically is a false positive and can be ignored.     
-- __Lighthouse:__ The results of the lighthouse evaluation in the Chrome development tool looked like this.
+  One final warning: Functions declared within loops referencing an outer scoped variable may lead to confusing semantics. This issue was not solved, despite efforts. But I was adviced by more experienced coders that this technically is a false positive and can be ignored.  
+  The following metrics were returned:
+  - There are 40 functions in this file
+  - Function with the largest signature take 2 arguments, while the median is 0.
+  - Largest function has 18 statements in it, while the median is 5.5.
+  - The most complex function has a cyclomatic complexity value of 5 while the median is 1.
+- __Lighthouse:__ The results of the lighthouse evaluation in the Chrome development tool for both desktop and mobile looked like this:  
+![Lighthouse evaluation](assets/images/readme-img/lighthouse.png)
 - __Responsivity:__ The Chrome development tool has been used to check the responsivity of the web-site. The site works well on all the available predefined screen sizes as well as on larger screens.
 - __Compatibility:__ The site has been checked for compatibility on Chrome, Edge, Firefox and Safari. The game's compatibility has also been tested on a set of different real life devices and was found to work fine.
 
@@ -112,9 +118,9 @@ The basic idea of applying the same pages to a larger screen:
 
 ### Further Testing
 The game was tested throughout the development process and a number of bugs were found and resolved. A couple of examples:
-- Different phenomenon occurd before I managed to get the eventlisteners right and the cards to turn and turn back as they were supposed to.
+- Different phenomenon occurred before I managed to get the event listeners right and the cards to turn and turn back as they were supposed to.
 - The game broke if the player pushed the quit game button before the cards had turned back.
-This was solved with an if statement checking that the card divs id has a valid value.
+This was solved with an if statement checking that the card divs id have a valid value.
 
 ### Known Bugs
 No know bugs remain.
@@ -132,7 +138,7 @@ https://odden69.github.io/memory-game/
 
 ## Credits
 ### Code
-Apart from finding inspiration in the course material from Code Institute I found myself getting information about JavaScript and CSS on these web sites: [W3Schools](https://www.w3schools.com/), [CSS-TRICKS](https://css-tricks.com/) and [stackoverflow](https://stackoverflow.com/).
+Apart from finding inspiration in the course material from Code Institute I found myself getting general information about JavaScript and CSS on these websites: [W3Schools](https://www.w3schools.com/), [CSS-TRICKS](https://css-tricks.com/) and [stackoverflow](https://stackoverflow.com/).
 - The card flip function which uses css transform, transition and backface-visibility properties to function, came from [w3Schools](https://www.w3schools.com/howto/howto_css_flip_image.asp).
 - The time delay function when the cards are turned was found on [w3Schools](https://www.w3schools.com/jsref/met_win_settimeout.asp).
 
@@ -142,7 +148,7 @@ Both the pattern on the backside of the cards and the images on the cards were c
 - Card images: [Human Vectors by Vecteezy](https://www.vecteezy.com/vector-art/1337877-set-of-children-toys)
 
 ## Acknowledgements
-First I want to thank my Mentor, Narender Singh, who supported me with lots of valuable advice and support during the development process. I have learnt a lot from him that I will benefit from in my future coding career.  
+First I want to thank my Mentor, Narender Singh, who gave me with lots of valuable advice and support during the development process. I have learnt a lot from him that I will benefit from in my future coding career.  
 My fellow slackers deserve, as usual, a big thank you for support and encouragement. No one mentioned, no one forgotten. 
 But the team from Code Institute's 2021 Retro Gaming Hackathon ["Team Noiseland"](https://github.com/andrewdempsey2018/The-Never-Ending-Coding-Adventure-Codehog-Day) needs mentioning since they have done a super job evaluating the game and trying to find bugs.
 
