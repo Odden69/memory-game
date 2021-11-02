@@ -389,6 +389,8 @@ function loadPlayGamePage() {
   selectFirstCard();
 }
 
+// - Playing the Game -
+
 let idFirstCard = '';
 let idSecondCard = '';
 let cardsMatched = [];
