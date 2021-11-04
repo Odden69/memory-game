@@ -84,7 +84,7 @@ The basic idea of applying the same pages to a larger screen:
 - All images were compressed using [Optimizilla](https://imagecompressor.com/).
 - [coolors](https://coolors.co/) was used to pull colours from the pattern on the back of the cards to create the colour scheme of the game.
 - The contrast of the colour scheme was checked on [Contrast Grid](https://contrast-grid.eightshapes.com/?version=1.1.0&background-colors=&foreground-colors=%23F7FCE2%2C%20Buttons%20and%20header%0D%0A%23193C32%2C%20Text%0D%0A%2387BFBB%2C%20Background%0D%0A&es-color-form__tile-size=compact&es-color-form__show-contrast=aaa&es-color-form__show-contrast=aa&es-color-form__show-contrast=aa18&es-color-form__show-contrast=dnp).
-- The project plan was made in google document. A pdf of it can be found [here](assets/documents/PP2-project plan.pdf)
+- The project plan was made in google document. A pdf of it can be found [here](assets/documents/PP2-project-plan.pdf).
 
 ## Testing
 - __CSS:__ No errors were returned when passing through the official [Jigsaw Validator](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fodden69.github.io%2Fmemory-game%2Findex.html&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=sv).  
