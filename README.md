@@ -65,6 +65,7 @@ The basic idea of applying the same pages to a larger screen:
 ### Features Left to Implement
 - A high score list would be nice to implement in the game in the future.
 - I would also like to add an alternate set of images to make it possible to choose an even harder version of the game.
+- To give the player more opportunities to influence the game, I would like to add an option menu. From here you could choose a different image for the back of the cards, adjust the time before the card turns, etc.
 
 ## Technologies Used
 
